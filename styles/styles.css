@@ -1,0 +1,91 @@
+/* Importa a fonte Roboto Flex do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+/* Define regras gerais para todos os elementos */
+*{
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove preenchimentos padrão */
+    box-sizing: border-box; /* Define que o tamanho total de elementos deve incluir as bordas e o preenchimento */
+    font-family: "Roboto Flex", serif; /* Define a fonte principal como Roboto Flex */
+}
+
+/* Estiliza o corpo da página */
+body{
+    background-color: #f1f5f9; /* Define a cor de fundo do corpo */
+    min-height: 100vh; /* Garante que o corpo ocupe no mínimo toda a altura da tela */
+    display: flex; /* Usa flexbox para organizar o layout */
+    flex-direction: column; /* Organiza os itens na direção vertical */
+    justify-content: center; /* Centraliza o conteúdo verticalmente */
+    align-items: center; /* Alinha o conteúdo horizontalmente */
+}
+
+/* Estiliza o formulário */
+form{
+    background-color: #ffffff; /* Define a cor de fundo do formulário */
+    border: 1px solid #727272; /* Define a borda do formulário */
+    color: #1c1c1c; /* Define a cor do texto dentro do formulário */
+    border-radius: 4px; /* Arredonda as bordas do formulário */
+    height: 320px; /* Define a altura do formulário */
+    width: 520px; /* Define a largura do formulário */
+    display: flex; /* Usa flexbox dentro do formulário */
+    flex-direction: column; /* Organiza os elementos dentro do formulário em coluna */
+    align-items: center; /* Alinha os itens ao centro horizontalmente */
+    justify-content: center; /* Centraliza os itens dentro do formulário verticalmente */
+}
+
+/* Estiliza o formulário de cadastro com altura maior */
+form.cadastro-form{
+    height: 420px; /* Define uma altura maior para o formulário de cadastro */
+}
+
+form.cadastro-produto-form{
+    height: 480px;
+}
+
+form.cadastro-produto-form > button#produto-btn{
+    background-color: #ff5c00;
+    width: 160px;
+    margin-top: 32px;
+}
+
+/* Estiliza os campos de entrada (input) dentro do formulário */
+form input{
+    padding: 0 12px; /* Adiciona preenchimento horizontal aos inputs */
+    outline: 0; /* Remove o contorno do input */
+    border: 1px solid #727272; /* Define a borda dos inputs */
+    border-radius: 4px; /* Arredonda as bordas dos inputs */
+    background-color: #ffffff; /* Define a cor de fundo dos inputs */
+    margin: 4px 0; /* Adiciona margem vertical entre os inputs */
+    width: 260px; /* Define a largura dos inputs */
+    height: 32px; /* Define a altura dos inputs */
+}
+
+/* Estiliza o campo de entrada (input) quando está em foco */
+form input:focus{
+    border: 1px solid #ff5c00; /* Altera a cor da borda para laranja quando o input está em foco */
+}
+
+/* Estiliza o botão dentro do formulário */
+form button{
+    cursor: pointer; /* Muda o cursor para ponteiro quando passa sobre o botão */
+    color: #f3f3f3; /* Define a cor do texto do botão como branco */
+    width: 130px; /* Define a largura do botão */
+    margin: 4px 0; /* Adiciona margem vertical ao botão */
+    border: none; /* Remove a borda do botão */
+    height: 32px; /* Define a altura do botão */
+}
+
+/* Estiliza o campo de senha dentro do formulário */
+form input#senha{
+    margin-bottom: 32px; /* Adiciona margem inferior ao campo de senha */
+}
+
+/* Estiliza o botão de envio */
+button[type="submit"]{
+    background-color: #ff5c00; /* Define a cor de fundo do botão de envio */
+}
+
+/* Estiliza o botão de cadastro */
+button[name="cadastrar"]{
+    background-color: #727272; /* Define a cor de fundo do botão de cadastro */
+}

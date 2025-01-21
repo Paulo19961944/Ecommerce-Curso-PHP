@@ -1,0 +1,22 @@
+# Arquivos de dependências
+/vendor/
+
+# Arquivos de configuração do ambiente local
+.env
+
+# Arquivos do sistema operacional
+.DS_Store      # Para MacOS
+Thumbs.db      # Para Windows
+
+# Arquivos de logs
+*.log
+
+# Diretórios temporários de IDEs
+.idea/         # Para PhpStorm ou IntelliJ
+.vscode/       # Para Visual Studio Code
+
+# Diretórios de cache
+/cache/
+
+# Diretórios de compilação ou artefatos de builds
+/build/
