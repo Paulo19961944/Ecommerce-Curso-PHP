@@ -64,25 +64,19 @@
             $this->quantidade = $quantidade;
         }
 
-        public function FindProduct(){
+        public function Listar(){
             $objconexao = new Conexao(); // Instancia a classe Conexao
             $conexao = $objconexao->getConexao(); // Conecta ao DB
+            $arrayProdutos = [];
+            $sql = "SELECT * FROM Produtos"; // Comando SQL para Consulta
     
-            $sql = "SELECT ID,Descricao,Valor,Categoria,Quantidade FROM Produtos"; // Comando SQL para Consulta
-    
-            $resposta = $conexao->query($sql); // Consulta no DB
-            $produto = $resposta->fetch_assoc(); // Obtem a Resposta do DB
-    
-            // Se não encontrar o produto, dizer que não foi cadastrado
-            if(!$produto){
-                echo "Produto não cadastrado";
-            } 
-
-            // Se tiver o produto, definir o ID do Produto
-            else{
-                $this->setId($produto["ID"]);
-                return true;
+            $resposta = mysqli_query($conexao, $sql); // Consulta no DB
+            while($produto = mysqli_fetch_assoc($resposta)){
+                array_push($arrayProdutos, $produto);
             }
+
+            mysqli_close($conexao);
+            return $arrayProdutos;
         }
 
         // Função para cadastrar um produto

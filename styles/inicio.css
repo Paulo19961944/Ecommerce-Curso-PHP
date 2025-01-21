@@ -71,6 +71,38 @@ header > section.header-container > nav > ul#menu > li > a:hover{
     text-decoration: underline; /* Adiciona sublinhado no hover */
 }
 
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main > section.product-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70vw;
+    margin: 96px 0;
+}
+
+main > section.product-container > table > thead{
+    background-color: #ff5c00;
+    color: #f3f3f3;
+    font-weight: normal;
+}
+
+main > section.product-container > table > thead > tr > th{
+    padding: 0 16px;
+}
+
+main > section.product-container > table > tbody{
+    background-color: #eaeaea;
+}
+
+main > section.product-container > table > tbody > tr > td{
+    padding: 0 16px;
+}
+
 /* Estiliza o container principal */
 main > section.main-container{
     width: 70vw; /* Define a largura do container como 70% da largura da tela */

@@ -47,5 +47,14 @@
                 return "Sucesso";
             }
         }
+
+        public function listaProdutos($objproduto){
+            // Verifique se a quantidade do produto é 0 (indicação de estoque vazio)
+            if($objproduto->getQuantidade() == 0){
+                echo "Acabou o Estoque";
+            } else {
+                return $objproduto->Listar();
+            }
+        }        
     }
 ?>

@@ -17,8 +17,8 @@
             <img src="../public/images/Logo-Ecommerce-Sem-Fundo.png" alt="Logotipo da Loja" id="logo">
             <nav class="menu-container">
                 <ul id="menu">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Produtos</a></li>
+                    <li><a href="http://localhost/ecommerce/views/inicio.php">Home</a></li>
+                    <li><a href="http://localhost/ecommerce/views/produto/listagem_produtos.php">Produtos</a></li>
                     <li><a href="#">Pedidos</a></li>
                     <li><a href="#">Carrinho</a></li>
                 </ul>
