@@ -44,4 +44,8 @@
             echo $resposta;
         }
     }
+
+    else if(isset($_POST["logar"])){
+        header("Location: http://localhost/ecommerce");
+    }
 ?>

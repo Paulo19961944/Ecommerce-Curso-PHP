@@ -16,11 +16,15 @@
     
         if($resposta === true){
             // Redireciona para a página inicial após o login
-            header("Location: /ecommerce/views/inicio.php");
+            header("Location: http://localhost/ecommerce/views/inicio.php");
             exit; // Não se esqueça de adicionar o exit após o redirecionamento
         } else {
             echo $resposta; // Exibe mensagem de erro
         }
+    }
+
+    else if(isset($_POST["cadastrar"])){
+        header("Location: http://localhost/ecommerce/views/usuario/cadastro_usuario.php");
     }
     
 ?>
