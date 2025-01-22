@@ -6,65 +6,42 @@
     include_once($path . '/models/produto.php'); 
 
     class ProdutoController{
-        // Função para cadastrar um novo produto
-        public function cadastraProduto($objproduto){
-            // Define a descrição do produto com base no input do formulário
-            $objproduto->setDescricao($_POST["descricao"]);
-            
-            // Define o valor do produto com base no input do formulário
-            $objproduto->setValor($_POST["valor"]);
-            
-            // Define a categoria do produto com base no input do formulário
-            $objproduto->setCategoria($_POST["categoria"]);
-            
-            // Define a quantidade do produto com base no input do formulário
-            $objproduto->setQuantidade($_POST["quantidade"]);
-
-            // Verifica se a descrição é inválida
-            if($objproduto->getDescricao() == NULL || strlen($objproduto->getDescricao()) > 100){
-                echo "Descrição Inválida";
-                return;
+        
+        // Função para obter o caminho da imagem baseado na ID
+        public function getImagemById($id) {
+            // Caminho absoluto do documento
+            $path = $_SERVER["DOCUMENT_ROOT"] . "/ecommerce"; 
+            // Carrega o arquivo JSON com os caminhos das imagens
+            $jsonFile = file_get_contents($path . '/public/json/imagens.json');
+            // Decodifica o JSON
+            $imagens = json_decode($jsonFile, true);
+        
+            // Verifica se existe uma imagem para o id fornecido
+            foreach ($imagens as $imagem) {
+                if ($imagem['id'] == $id) {
+                    // Aqui, vamos adicionar o prefixo http://localhost/ecommerce antes do caminho da imagem
+                    return "http://localhost/ecommerce" . $imagem['image-path']; 
+                }
             }
-
-            // Verifica se o valor é inválido (ele deve ser um número e não nulo)
-            if ($objproduto->getValor() == NULL || !is_numeric($objproduto->getValor())) {
-                echo "Valor Inválido";
-                return;
-            }
-
-            // Verifica se a categoria é inválida
-            if($objproduto->getCategoria() == NULL || strlen($objproduto->getCategoria()) > 100){
-                echo "Categoria Inválida";
-                return;
-            }
-
-            // Verifica se a quantidade é inválida (ele deve ser um número e não nulo)
-            if ($objproduto->getQuantidade() == NULL || !is_numeric($objproduto->getQuantidade())) {
-                echo "Quantidade Inválida";
-                return;
-            }
-
-            // Se o upload da imagem não for bem-sucedido, retorna um erro
-            if(!isset($_FILES["imagem"]) || !$this->uploadImagem($_FILES["imagem"])){
-                echo "A Imagem não foi carregada";
-                return;
-            }
-
-            // Se não houver erros, cadastra o produto e retorna sucesso
-            $objproduto->cadastrar();
-            return "Produto cadastrado com sucesso!";
-        }
-
+            return null; // Se não encontrar a imagem
+        }        
+        
+        // Função para listar os produtos, agora incluindo a imagem
         public function listaProdutos($objproduto){
-            // Verifique se a quantidade do produto é 0 (indicação de estoque vazio)
-            if($objproduto->getQuantidade() == 0){
-                echo "Acabou o Estoque";
-            } else {
-                return $objproduto->Listar();
+            // Obtém os produtos
+            $produtos = $objproduto->Listar();
+            
+            // Associa o caminho da imagem ao produto
+            foreach ($produtos as $key => $produto) {
+                // Agora associamos corretamente o caminho da imagem ao produto
+                $produtos[$key]['imagem'] = $this->getImagemById($produto['ID']);
             }
+            
+            // Retorna a lista de produtos com a imagem
+            return $produtos;
         } 
 
-        // Função para fazer o upload da imagem
+        // Função para fazer o upload da imagem (não alterada)
         public function uploadImagem($objimagem){
             // Caminho do Arquivo
             $path = $_SERVER["DOCUMENT_ROOT"]. "/ecommerce";

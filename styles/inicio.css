@@ -91,22 +91,39 @@ main > section.product-container > h1.product-title{
     margin-bottom: 48px;
 }
 
-main > section.product-container > table > thead{
+main > section.product-container > article.product{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 48px;
+}
+
+main > section.product-container > article.product > h2{
+    font-size: 1.625rem;
+    margin: 32px 0;
+}
+
+main > section.product-container > article.product > img.produto-imagem{
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 999px;
+    margin-bottom: 32px;
+}
+
+main > section.product-container > article.product > button.comprar{
+    cursor: pointer;
+    border-radius: 4px;
     background-color: #ff5c00;
+    font-weight: 500;
     color: #f3f3f3;
-    font-weight: normal;
-}
-
-main > section.product-container > table > thead > tr > th{
-    padding: 0 16px;
-}
-
-main > section.product-container > table > tbody{
-    background-color: #eaeaea;
-}
-
-main > section.product-container > table > tbody > tr > td{
-    padding: 0 16px;
+    border: none;
+    width: 160px;
+    height: 40px;
+    margin: 48px 0;
+    animation: pulse 1.2s infinite; /* Aplica a animação de pulsação */
 }
 
 /* Estiliza o container principal */

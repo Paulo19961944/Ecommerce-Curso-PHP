@@ -34,54 +34,48 @@
             include_once($path . '/controllers/produto_controller.php');
 
             $objproduto = new Produto();
-            $produtos = $objproduto->Listar();
+            $produtoController = new ProdutoController();
+            $produtos = $produtoController->listaProdutos($objproduto);
+            ?>
+    
+            <?php
+            foreach ($produtos as $produto) {
+                echo "<article class=\"product\">";
+                    echo "<h2>";
+                        echo "Produto ";
+                        echo $produto['ID'];
+                    echo "</h2>";
+
+                    // Exibe a imagem associada ao produto
+                    if (isset($produto['imagem']) && !empty($produto['imagem'])) {
+                        echo "<img src=\"" . $produto['imagem'] . "\" alt=\"Imagem do Produto\" class=\"produto-imagem\">";
+                    } else {
+                        echo "<p>Imagem não disponível</p>";
+                    }                        
+
+                    echo "<p>";
+                        echo "<b>Descrição do Produto: </b>";
+                        echo $produto['Descricao'];
+                    echo "</p>";
+                    echo "<p>";
+                        echo "<b>Preço: </b>";
+                        echo $produto['Valor'];
+                        echo " R$";
+                    echo "</p>";
+                    echo "<p>";
+                        echo "<b>Categoria: </b>";
+                        echo $produto['Categoria'];
+                    echo "</p>";
+                    echo "<p>";
+                        echo "<b>Quantidade em Estoque: </b>";
+                        echo $produto['Quantidade'];
+                    echo "</p>";
+                    echo "<button class=\"comprar\">Compre Agora</button>";
+                echo "</article>";
+            }
             ?>
 
-            <table border="1" cellpadding="10" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Descrição</th>
-                        <th>Valor</th>
-                        <th>Categoria</th>
-                        <th>Quantidade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    foreach ($produtos as $produto) {
-                        echo "<tr>";
-                        // Verificando se o índice 'id' existe
-                        echo "<td>";
-                        echo isset($produto['ID']) ? $produto['ID'] : 'Não disponível';
-                        echo "</td>";
-
-                        // Verificando se o índice 'descricao' existe
-                        echo "<td>";
-                        echo isset($produto['Descricao']) ? $produto['Descricao'] : 'Não disponível';
-                        echo "</td>";
-
-                        // Verificando se o índice 'valor' existe
-                        echo "<td>";
-                        echo isset($produto['Valor']) ? $produto['Valor'] : 'Não disponível';
-                        echo "</td>";
-
-                        // Verificando se o índice 'categoria' existe
-                        echo "<td>";
-                        echo isset($produto['Categoria']) ? $produto['Categoria'] : 'Não disponível';
-                        echo "</td>";
-
-                        // Verificando se o índice 'quantidade' existe
-                        echo "<td>";
-                        echo isset($produto['Quantidade']) ? $produto['Quantidade'] : 'Não disponível';
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
         </section>
-
 
         <footer>
             <section class="footer-container">
