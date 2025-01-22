@@ -71,9 +71,9 @@ class Usuario{
         $sql = "INSERT INTO Usuarios (Nome, Email, Senha) VALUES('$this->nome', '$this->email', '$this->senha')";
 
         if(mysqli_query($conexao, $sql)){
-            return "Sucesso"; // Não alterei o fluxo de sucesso
+            return "Sucesso";
         } else{
-            return "Erro"; // Fluxo de erro para caso o cadastro falhe
+            return "Erro";
         }
         mysqli_close($conexao);
     }

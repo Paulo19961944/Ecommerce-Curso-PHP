@@ -21,8 +21,6 @@
     
     // Inclui o arquivo do controlador de produto
     include_once($path . '/controllers/produto_controller.php');
-    
-    include_once($path . '/controllers/usuario_controller.php'); // Inclui o controlador de usuário
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -33,38 +31,41 @@
     <link rel="stylesheet" href="../../styles/styles.css">
 </head>
 <body>
-    <form action="" method="post" class="cadastro-produto-form">
+    <form action="" method="post" class="cadastro-produto-form" enctype="multipart/form-data">
         <label for="valor">Valor</label>
         <input type="text" name="valor" id="valor">
         <label for="categoria">Categoria:</label>
         <input type="text" name="categoria" id="categoria">
         <label for="quantidade">Quantidade:</label>
         <input type="text" name="quantidade" id="quantidade">
+        <label for="imagem">Imagem:</label>
+        <input type="file" name="imagem" id="imagem">
         <label for="descricao">Descrição:</label>
         <textarea name="descricao" id="descricao"></textarea>
         <button type="submit" name="cadastrar" id="produto-btn">Cadastrar Produto</button>
     </form>
+
+    <?php 
+        // Verifica se o formulário foi enviado
+        if(isset($_POST["cadastrar"])){
+            $objproduto = new Produto(); // Cria um novo produto
+            
+            // Define os atributos do produto
+            $objproduto->setDescricao($_POST["descricao"]);
+            $objproduto->setValor($_POST["valor"]);
+            $objproduto->setCategoria($_POST["categoria"]);
+            $objproduto->setQuantidade($_POST["quantidade"]);
+            
+            $controllerproduto = new ProdutoController(); // Cria o controlador de produto
+            $resposta = $controllerproduto->cadastraProduto($objproduto);  // Recebe a resposta do cadastro
+            
+            // Se houver resposta, exibe
+            if ($resposta == "Sucesso") {
+                header("Location: http://localhost/ecommerce/views/inicio.php");
+            } else{
+                echo $resposta;
+            }
+        }
+    ?>
 </body>
 </html>
-
-<?php 
-    // Verifica se o formulário foi enviado
-    if(isset($_POST["cadastrar"])){
-        $objproduto = new Produto(); // Cria um novo produto
-        
-        // Define os atributos do produto
-        $objproduto->setDescricao($_POST["descricao"]);
-        $objproduto->setValor($_POST["valor"]);
-        $objproduto->setCategoria($_POST["categoria"]);
-        $objproduto->setQuantidade($_POST["quantidade"]);
-        
-        $controllerproduto = new ProdutoController(); // Cria o controlador de produto
-        $resposta = $controllerproduto->cadastraProduto($objproduto);
-
-        if($resposta == "Sucesso"){
-            header("Location: /ecommerce/views/inicio.php"); // Redireciona para a página inicial após o sucesso
-        } else {
-            echo $resposta; // Exibe mensagem de erro
-        }
-    }
-?>
