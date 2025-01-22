@@ -27,7 +27,7 @@
     </header>
     <main>
         <section class="main-container">
-            <h2>Produtos</h2>
+            <h2>Home</h2>
             <article class="image-main-container">
                 <button class="btn">Clique Aqui</button>
             </article>

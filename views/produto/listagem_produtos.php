@@ -28,6 +28,7 @@
     <main>
 
         <section class="product-container">
+            <h1 class="product-title">Produtos</h1>
             <?php
             $path = $_SERVER["DOCUMENT_ROOT"] . '/ecommerce';
             include_once($path . '/controllers/produto_controller.php');

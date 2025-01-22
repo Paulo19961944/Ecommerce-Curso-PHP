@@ -79,10 +79,16 @@ main{
 
 main > section.product-container{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 70vw;
     margin: 96px 0;
+}
+
+main > section.product-container > h1.product-title{
+    font-size: 2rem;
+    margin-bottom: 48px;
 }
 
 main > section.product-container > table > thead{
