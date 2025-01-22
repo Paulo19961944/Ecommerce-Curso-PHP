@@ -48,7 +48,7 @@
             }
             // Se não houver erros, cadastra o produto e retorna sucesso
             $objproduto->cadastrar();
-            return "Produto cadastrado com sucesso!";
+            return "Sucesso";
         }
 
         // Função para obter o caminho da imagem baseado na ID

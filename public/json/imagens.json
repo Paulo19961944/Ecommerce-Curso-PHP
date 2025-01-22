@@ -22,5 +22,9 @@
     {
         "id": 6,
         "image-path": "/public/images/produtos/Luvas-de-Boxe-01.jpg"
+    },
+    {
+        "id": 7,
+        "image-path": "/public/images/produtos/Raquete-de-Tenis-01.jpg"
     }
 ]
