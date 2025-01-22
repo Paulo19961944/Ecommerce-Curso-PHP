@@ -46,9 +46,41 @@
                 echo "A Imagem não foi carregada";
                 return;
             }
+            
+            // Atualiza a ID do produto antes de cadastrá-lo
+            $this->atualizaId($objproduto);
+            
             // Se não houver erros, cadastra o produto e retorna sucesso
             $objproduto->cadastrar();
             return "Sucesso";
+        }
+
+        // Função para atualizar a ID do produto
+        private function atualizaId($objproduto) {
+            // Caminho para o arquivo JSON com os produtos
+            $filePath = $_SERVER["DOCUMENT_ROOT"] . "/ecommerce/public/json/imagens.json";
+
+            // Carrega o arquivo JSON
+            $jsonContent = file_get_contents($filePath);
+            $produtos = json_decode($jsonContent, true);
+
+            // Encontrar a maior ID e incrementar
+            $maxId = max(array_column($produtos, 'id')) + 1;
+
+            // Atribui a nova ID ao objeto produto
+            $objproduto->setId($maxId);
+
+            // Atualiza o caminho da imagem
+            $objproduto->setImagem("/public/images/produtos/" . basename($_FILES["imagem"]["name"]));
+
+            // Adiciona o novo produto ao array de produtos
+            $produtos[] = [
+                'id' => $objproduto->getId(),
+                'image-path' => $objproduto->getImagem()
+            ];
+
+            // Salva de volta o arquivo JSON com os novos dados
+            file_put_contents($filePath, json_encode($produtos, JSON_PRETTY_PRINT));
         }
 
         // Função para obter o caminho da imagem baseado na ID
@@ -60,7 +92,6 @@
             // Verifica se existe uma imagem para o id fornecido
             foreach ($imagens as $imagem) {
                 if ($imagem['id'] == $id) {
-                    // Aqui, vamos adicionar o prefixo http://localhost/ecommerce antes do caminho da imagem
                     return "http://localhost/ecommerce" . $imagem['image-path']; 
                 }
             }
@@ -74,11 +105,9 @@
             
             // Associa o caminho da imagem ao produto
             foreach ($produtos as $key => $produto) {
-                // Agora associamos corretamente o caminho da imagem ao produto
                 $produtos[$key]['imagem'] = $this->getImagemById($produto['ID']);
             }
             
-            // Retorna a lista de produtos com a imagem
             return $produtos;
         } 
 
@@ -92,7 +121,7 @@
 
             // Verifica se o diretório existe, caso contrário, cria
             if (!file_exists($target_dir)) {
-                mkdir($target_dir, 0777, true); // Cria o diretório e garante que ele tem permissão correta
+                mkdir($target_dir, 0777, true);
             }
 
             // Caminho completo do arquivo (diretório + nome do arquivo)

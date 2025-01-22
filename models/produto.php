@@ -13,6 +13,7 @@
         private $valor;
         private $categoria;
         private $quantidade;
+        private $imagem; // Adicionando o atributo imagem
 
         // Método para obter o id do produto
         public function getId(){
@@ -64,6 +65,17 @@
             $this->quantidade = $quantidade;
         }
 
+        // Método para obter o caminho da imagem do produto
+        public function getImagem(){
+            return $this->imagem;
+        }
+
+        // Método para definir o caminho da imagem do produto
+        public function setImagem($imagem){
+            $this->imagem = $imagem;
+        }
+
+        // Método para listar os produtos
         public function Listar(){
             $objconexao = new Conexao(); // Instancia a classe Conexao
             $conexao = $objconexao->getConexao(); // Conecta ao DB
@@ -83,9 +95,10 @@
         public function cadastrar(){
             $objconexao = new Conexao(); // Instancia a Classe Conexão
             $conexao = $objconexao->getConexao(); // Cria uma Conexão com o BD
-    
-            $sql = "INSERT INTO Produtos (Descricao,Valor,Categoria,Quantidade) VALUES('$this->descricao', '$this->valor', '$this->categoria', '$this->quantidade')"; // Comando SQL
-    
+
+            $sql = "INSERT INTO Produtos (Descricao,Valor,Categoria,Quantidade) 
+                    VALUES('$this->descricao', '$this->valor', '$this->categoria', '$this->quantidade')"; // Comando SQL
+
             // Se ocorrer tudo bem
             if(mysqli_query($conexao, $sql)){
                 return "Sucesso"; // Retorna sucesso
@@ -94,5 +107,6 @@
             }
             mysqli_close($conexao); // Fecha a conexão com o DB
         }
+
     }
-?> 
+?>
