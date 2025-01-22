@@ -34,14 +34,14 @@
 </head>
 <body>
     <form action="" method="post" class="cadastro-produto-form">
-        <label for="descricao">Descrição:</label>
-        <input type="text" id="descricao" name="descricao" required>
         <label for="valor">Valor</label>
-        <input type="number" name="valor" id="valor">
+        <input type="text" name="valor" id="valor">
         <label for="categoria">Categoria:</label>
         <input type="text" name="categoria" id="categoria">
         <label for="quantidade">Quantidade:</label>
-        <input type="number" name="quantidade" id="quantidade">
+        <input type="text" name="quantidade" id="quantidade">
+        <label for="descricao">Descrição:</label>
+        <textarea name="descricao" id="descricao"></textarea>
         <button type="submit" name="cadastrar" id="produto-btn">Cadastrar Produto</button>
     </form>
 </body>

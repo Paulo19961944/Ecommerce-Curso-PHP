@@ -39,7 +39,7 @@ form.cadastro-form{
 }
 
 form.cadastro-produto-form{
-    height: 480px;
+    height: 464px;
 }
 
 form.cadastro-produto-form > button#produto-btn{
@@ -63,6 +63,12 @@ form input{
 /* Estiliza o campo de entrada (input) quando está em foco */
 form input:focus{
     border: 1px solid #ff5c00; /* Altera a cor da borda para laranja quando o input está em foco */
+}
+
+form textarea#descricao{
+    padding: 8px 12px;
+    width: 260px;
+    height: 114px;
 }
 
 /* Estiliza o botão dentro do formulário */
