@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "image-path": "/public/images/produtos/Tenis-Michael-Jordan-01.jpg"
+    },
+    {
+        "id": 2,
+        "image-path": "/public/images/produtos/Livro-Reeducacao-Alimentar.jpg"
+    },
+    {
+        "id": 3,
+        "image-path": "/public/images/produtos/Exercicios.jpg"
+    },
+    {
+        "id": 4,
+        "image-path": "/public/images/produtos/Smartwatch-1.jpg"
+    },
+    {
+        "id": 5,
+        "image-path": "/public/images/produtos/Bola-de-Basquete.jpg"
+    },
+    {
+        "id": 6,
+        "image-path": "/public/images/produtos/Luva-de-Boxe-01.jpg"
+    }
+]
