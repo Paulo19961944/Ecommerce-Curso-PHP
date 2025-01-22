@@ -29,7 +29,7 @@
         <section class="main-container">
             <h2>Home</h2>
             <article class="image-main-container">
-                <button class="btn">Clique Aqui</button>
+                <button class="btn"><a href="http://localhost/ecommerce/views/produto/listagem_produtos.php">Clique Aqui</a></button>
             </article>
         </section>
     </main>

@@ -166,12 +166,13 @@ main > section.main-container > article.image-main-container > button.btn{
     height: 40px; /* Define a altura do botão */
     position: absolute; /* Define a posição como absoluta */
     bottom: 48px; /* Posiciona o botão a 48px da parte inferior */
+    animation: pulse 1.2s infinite; /* Aplica a animação de pulsação */
 }
 
-/* Estiliza o estado de hover do botão */
-main > section.main-container > article.image-main-container > button.btn:hover{
-    transition: 0.5s ease-in-out; /* Adiciona transição suave no hover */
-    animation: pulse 1.2s infinite; /* Aplica a animação de pulsação */
+
+main > section.main-container > article.image-main-container > button.btn > a{
+    text-decoration: none;
+    color: #f3f3f3;
 }
 
 /* Estiliza o rodapé */
@@ -230,7 +231,7 @@ footer > section.footer-container > article.contato > p{
     }
 
     50%{
-        transform: scale(1.04); /* Aumenta um pouco o tamanho */
+        transform: scale(1.03); /* Aumenta um pouco o tamanho */
     }
 
     100%{
