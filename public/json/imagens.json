@@ -33,6 +33,10 @@
     },
     {
         "id": 9,
-        "image-path": "\/public\/images\/produtos\/Garrafa-Termica-01.jpg"
+        "image-path": "\/public\/images\/produtos\/Mochila-01.jpg"
+    },
+    {
+        "id": 10,
+        "image-path": "\/public\/images\/produtos\/Prancha-de-Surf.jpg"
     }
 ]
