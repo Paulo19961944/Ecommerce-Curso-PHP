@@ -38,5 +38,9 @@
     {
         "id": 10,
         "image-path": "\/public\/images\/produtos\/Prancha-de-Surf.jpg"
+    },
+    {
+        "id": 11,
+        "image-path": "\/public\/images\/produtos\/Bike-1.jpg"
     }
 ]
