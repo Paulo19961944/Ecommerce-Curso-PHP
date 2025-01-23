@@ -113,7 +113,7 @@ main > section.product-container > article.product > img.produto-imagem{
     margin-bottom: 32px;
 }
 
-main > section.product-container > article.product > button.comprar{
+main > section.product-container > article.product > form > button.comprar{
     cursor: pointer;
     border-radius: 4px;
     background-color: #ff5c00;

@@ -32,6 +32,8 @@
             <?php
             $path = $_SERVER["DOCUMENT_ROOT"] . '/ecommerce';
             include_once($path . '/controllers/produto_controller.php');
+            include_once($path . '/controllers/carrinhos_controller.php');
+            session_start();
 
             $objproduto = new Produto();
             $produtoController = new ProdutoController();
@@ -70,8 +72,19 @@
                         echo "<b>Quantidade em Estoque: </b>";
                         echo $produto['Quantidade'];
                     echo "</p>";
-                    echo "<button class=\"comprar\">Compre Agora</button>";
+                    echo "<form action=\"\" method=\"post\">";
+                        echo '<input type="hidden" name="produto_id" value="' . $produto['ID'] . '">';
+                        echo "<button class=\"comprar\" name=\"comprar\">Compre Agora</button>";
+                    echo "</form>";
                 echo "</article>";
+            }
+            ?>
+            <?php 
+            if (isset($_POST["comprar"])) {
+                $produtoId = $_POST["produto_id"]; // Pega o produto ID do formulário
+                $usuarioId = $_SESSION["usuario_id"]; // Usuário já está na sessão
+                $objcarrinho = new CarrinhosController();
+                $objcarrinho->adicionarProduto($produtoId, $usuarioId);
             }
             ?>
 

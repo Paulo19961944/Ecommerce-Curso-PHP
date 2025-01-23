@@ -2,6 +2,7 @@
     session_start(); // Inicia a sessão
     $path = $_SERVER["DOCUMENT_ROOT"] . '/ecommerce'; // Caminho Padrão da Página
     include_once($path . '/controllers/usuario_controller.php'); // Importa o Controller
+    include_once($path . '/models/produto.php');
 
     // Se o botão de login for clicado
     if(isset($_POST["logar"])){
@@ -10,9 +11,13 @@
         // Define o email e a senha do usuário
         $objusuario->setEmail($_POST["email"]);
         $objusuario->setSenha($_POST["senha"]);
+
+        // Objeto Produto
+        $objproduto = new Produto();
     
+        // Controller Usuario
         $controllerusuario = new UsuarioController(); // Cria o controlador de usuário
-        $resposta = $controllerusuario->login($objusuario); // Chama a validação e login do usuário
+        $resposta = $controllerusuario->login($objusuario, $objproduto); // Chama a validação e login do usuário
     
         if($resposta === true){
             // Redireciona para a página inicial após o login

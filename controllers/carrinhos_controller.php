@@ -1,7 +1,7 @@
 <?php 
 $path = $_SERVER["DOCUMENT_ROOT"] . "/ecommerce";
-include_once($path . "models/carrinhos.php");
-include_once($path . "conexao.php");
+include_once($path . "/models/carrinhos.php");
+include_once($path . "/conexao.php");
 
 class CarrinhosController{
     public function listaProdutos($objproduto){
@@ -14,8 +14,13 @@ class CarrinhosController{
         $conexao = (new Conexao())->getConexao();
         // Cria um objeto Carrinho
         $carrinho = new Carrinhos();
-        $carrinho->setProdutoId($produtoId);
-        $carrinho->setUsuarioId($usuarioId);
+        
+        // Inicia a sessão
+        session_start();
+
+        // Seleciona o ID do Produto e Usuario
+        $carrinho->setProdutoId($_SESSION["produto_id"]);
+        $carrinho->setUsuarioId($_SESSION["usuario_id"]);
     
         // Verifica se o produto já existe no carrinho
         $sql = "SELECT * FROM Carrinhos WHERE Produto_id = '$produtoId' AND Usuario_id = '$usuarioId'";
@@ -34,6 +39,7 @@ class CarrinhosController{
         if (mysqli_query($conexao, $sql)) {
             return true; // Produto adicionado com sucesso
         } else {
+            echo "Não foi possivel adicionar o produto ao carrinho!";
             return false; // Ocorreu um erro
         }
     }
