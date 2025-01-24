@@ -67,6 +67,10 @@
                     </tr>
                 </tfoot>
             </table>
+            <form action="" method="post">
+                <button class="finalizar-btn" name="finalizar">Finalizar Pedido</button>
+                <button class="voltar-btn" name="voltar">Voltar</button>
+            </form>
         </section>
     </main>
 
