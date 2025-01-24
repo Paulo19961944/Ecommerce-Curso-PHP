@@ -78,7 +78,11 @@
         $path = $_SERVER["DOCUMENT_ROOT"] . "/ecommerce";
         
         if(isset($_POST["voltar"])){
-            header("Location: http://localhost/ecommerce/views/inicio.php");
+            header("Location: http://localhost/ecommerce/views/produto/listagem_produtos.php");
+        }
+
+        if(isset($_POST["finalizar"])){
+            header("Location: http://localhost/ecommerce/views/checkout/checkout.php");
         }
     ?>
 

@@ -45,6 +45,12 @@
         <button name="voltar" class="voltar">Voltar</button>
     </form>
 
+    <?php 
+        if(isset($_POST["voltar"])){
+            header("Location: http://localhost/ecommerce/views/carrinho/lista_carrinho.php");
+        }
+    ?>
+
     <footer>
         <section class="footer-container">
             <article class="horario">
