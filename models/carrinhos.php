@@ -87,5 +87,32 @@ class Carrinhos {
         mysqli_close($conexao); // Fecha a conexão
         return $arrayProdutos; // Retorna os produtos com preço
     }
+
+    // Método para verificar se o produto já existe e adicionar ou atualizar
+    public function adicionarOuAtualizarProduto($usuarioId, $produtoId) {
+        $objconexao = new Conexao(); // Instancia a Classe Conexão
+        $conexao = $objconexao->getConexao(); // Cria uma Conexão com o BD
+
+        // Verifica se o produto já existe no carrinho
+        $sql = "SELECT * FROM Carrinhos WHERE Produto_id = '$produtoId' AND Usuario_id = '$usuarioId'";
+        $resultado = mysqli_query($conexao, $sql);
+
+        if (mysqli_num_rows($resultado) > 0) {
+            // Produto já existe, incrementa a quantidade
+            $row = mysqli_fetch_assoc($resultado);
+            $novaQuantidade = $row['Quantidade'] + 1;
+            $sql = "UPDATE Carrinhos SET Quantidade = '$novaQuantidade' WHERE Produto_id = '$produtoId' AND Usuario_id = '$usuarioId'";
+        } else {
+            // Produto não existe, insere um novo registro
+            $sql = "INSERT INTO Carrinhos (Usuario_id, Produto_id, Quantidade) VALUES ('$usuarioId', '$produtoId', '1')";
+        }
+
+        if (mysqli_query($conexao, $sql)) {
+            return true; // Produto adicionado com sucesso
+        } else {
+            return false; // Ocorreu um erro
+        }
+        mysqli_close($conexao); // Fecha a conexão com o DB
+    }
 }
 ?>
