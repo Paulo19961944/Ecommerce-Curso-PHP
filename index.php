@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <form action="" method="post">
+    <form action="" method="post" class="login-form">
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
         <label for="senha">Senha:</label>

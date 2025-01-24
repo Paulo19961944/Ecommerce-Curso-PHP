@@ -2,96 +2,447 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
 
 /* Define regras gerais para todos os elementos */
-*{
-    margin: 0; /* Remove margens padrão */
-    padding: 0; /* Remove preenchimentos padrão */
-    box-sizing: border-box; /* Define que o tamanho total de elementos deve incluir as bordas e o preenchimento */
-    font-family: "Roboto Flex", serif; /* Define a fonte principal como Roboto Flex */
+* {
+    margin: 0;
+    /* Remove margens padrão */
+    padding: 0;
+    /* Remove preenchimentos padrão */
+    box-sizing: border-box;
+    /* Define que o tamanho total de elementos deve incluir as bordas e o preenchimento */
+    font-family: "Roboto Flex", serif;
+    /* Define a fonte principal como Roboto Flex */
 }
 
 /* Estiliza o corpo da página */
-body{
+body {
     background-color: #f1f5f9; /* Define a cor de fundo do corpo */
     min-height: 100vh; /* Garante que o corpo ocupe no mínimo toda a altura da tela */
     display: flex; /* Usa flexbox para organizar o layout */
     flex-direction: column; /* Organiza os itens na direção vertical */
     justify-content: center; /* Centraliza o conteúdo verticalmente */
     align-items: center; /* Alinha o conteúdo horizontalmente */
+    overflow-x: hidden;
+}
+
+/* Estiliza o cabeçalho */
+header{
+    display: flex; /* Usa flexbox no cabeçalho */
+    justify-content: center; /* Alinha o conteúdo ao centro */
+    background-color: #f3f3f3; /* Define a cor de fundo */
+    border-bottom-width: 2px; /* Define a espessura da borda inferior */
+    border-bottom-color: #ff5c00; /* Define a cor da borda inferior */
+    border-bottom-style: solid; /* Define o estilo da borda como sólida */
+    width: 100vw; /* Define a largura do cabeçalho para 100% da largura da tela */
+    height: 144px; /* Define a altura do cabeçalho */
+}
+
+/* Define o layout do container do cabeçalho */
+header > section.header-container{
+    width: 70vw; /* Define a largura do container como 70% da largura da tela */
+    display: flex; /* Usa flexbox no container */
+    justify-content: space-between; /* Espaça os itens igualmente */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+}
+
+/* Define o tamanho e a posição do logo no cabeçalho */
+header > section.header-container > img#logo{
+    width: 144px; /* Define a largura do logo */
+    height: 144px; /* Define a altura do logo */
+}
+
+/* Define o estilo do menu de navegação */
+header > section.header-container > nav > ul#menu{
+    display: flex; /* Exibe o menu como um flex container */
+}
+
+/* Estiliza cada item da lista do menu */
+header > section.header-container > nav > ul#menu > li{
+    list-style-type: none; /* Remove o marcador da lista */
+    margin-right: 32px; /* Adiciona espaçamento entre os itens */
+}
+
+/* Define o estilo dos links no menu */
+header > section.header-container > nav > ul#menu > li > a{
+    letter-spacing: -0.1px; /* Define o espaçamento entre as letras */
+    color: #1c1c1c; /* Define a cor do texto */
+    text-decoration: none; /* Remove o sublinhado do texto */
+}
+
+/* Estiliza o estado de hover dos links no menu */
+header > section.header-container > nav > ul#menu > li > a:hover{
+    color: #ff5c00; /* Muda a cor do texto no hover */
+    font-weight: bold; /* Torna o texto em negrito */
+    transition: 0.3s ease-in-out; /* Define a transição suave para a cor e o peso da fonte */
+    text-decoration: underline; /* Adiciona sublinhado no hover */
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main>section.product-container,
+main>section.carrinho-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70vw;
+    margin: 96px 0;
+}
+
+main>section.product-container>h1.product-title,
+main>section.carrinho-container>h1.carrinho-title {
+    font-size: 2rem;
+    margin-bottom: 48px;
+}
+
+main>section.product-container>article.product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 48px;
+}
+
+main>section.product-container>article.product>h2 {
+    font-size: 1.625rem;
+    margin: 32px 0;
+}
+
+main>section.product-container>article.product>img.produto-imagem {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 999px;
+    margin-bottom: 32px;
+}
+
+main>section.product-container>article.product>form>button.comprar {
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #ff5c00;
+    font-weight: 500;
+    color: #f3f3f3;
+    border: none;
+    width: 160px;
+    height: 40px;
+    margin: 48px 0;
+    animation: pulse 1.2s infinite;
+    /* Aplica a animação de pulsação */
+}
+
+main>section.carrinho-container>table {
+    border-collapse: collapse;
+}
+
+main>section.carrinho-container>table {
+    width: 720px;
+}
+
+main>section.carrinho-container>table>thead>tr {
+
+    color: #0c0c0c;
+}
+
+main>section.carrinho-container>table>thead>tr>th {
+    border-bottom: 2px solid #ff5c00;
+    padding: 8px;
+    font-weight: 600;
+}
+
+main>section.carrinho-container>table>tbody>tr>td {
+    border-bottom: 2px solid #ff5c00;
+    padding: 8px;
+    text-align: center;
+}
+
+main>section.carrinho-container>table>tfoot>tr>td {
+    border-bottom: 2px solid #ff5c00;
+    padding: 8px;
+    text-align: center;
+}
+
+main>section.carrinho-container>form.carrinho-form {
+    display: flex;
+    flex-direction: column;
+}
+
+main>section.carrinho-container>form.carrinho-form>button.finalizar-btn,
+main>section.carrinho-container>form>button.voltar-btn {
+    border-radius: 4px;
+    cursor: pointer;
+    width: 160px;
+    height: 40px;
+    border: none;
+    font-weight: 500;
+    background-color: #ff5c00;
+    color: #f3f3f3;
+    margin: 56px 0 0;
+}
+
+main>section.carrinho-container>form.carrinho-form>button.voltar-btn {
+    background-color: #6c7d8f;
+    margin-top: 8px;
+}
+
+
+main>section.carrinho-container>form.carrinho-form>button.finalizar-btn:hover,
+main>section.carrinho-container>form>button.voltar-btn:hover {
+    animation: pulse 1.2s infinite;
+}
+
+/* Estiliza o container principal */
+main>section.main-container {
+    width: 70vw;
+    /* Define a largura do container como 70% da largura da tela */
+    margin-top: 96px;
+    /* Adiciona margem superior ao container */
+}
+
+/* Estiliza o título dentro do container principal */
+main>section.main-container>h2 {
+    font-size: 2rem;
+    /* Define o tamanho da fonte */
+    text-align: center;
+    /* Alinha o texto ao centro */
+    margin-bottom: 48px;
+    /* Adiciona margem inferior ao título */
+}
+
+/* Estiliza o container da imagem principal */
+main>section.main-container>article.image-main-container {
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    /* Adiciona sombra ao redor da imagem */
+    border-radius: 8px;
+    /* Define bordas arredondadas */
+    display: flex;
+    /* Usa flexbox para posicionar o conteúdo */
+    justify-content: center;
+    /* Centraliza o conteúdo dentro do container */
+    position: relative;
+    /* Define a posição do container como relativa */
+    background-image: url("../public/images/Banner-Artigos-Esportivos-01.jpg");
+    /* Define a imagem de fundo */
+    background-size: cover;
+    /* Ajusta a imagem para cobrir o espaço do container */
+    width: 100%;
+    /* Define a largura para 100% */
+    height: 720px;
+    /* Define a altura do container */
+    margin-bottom: 96px;
+    /* Adiciona margem inferior ao container */
+}
+
+/* Estiliza o botão dentro da imagem principal */
+main>section.main-container>article.image-main-container>button.btn {
+    cursor: pointer;
+    /* Altera o cursor para o tipo de ponteiro ao passar o mouse */
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    /* Adiciona sombra ao botão */
+    border: none;
+    /* Remove a borda do botão */
+    border-radius: 999px;
+    /* Torna o botão completamente arredondado */
+    background-color: #ff5c00;
+    /* Define a cor de fundo do botão */
+    font-weight: 600;
+    /* Define o peso da fonte como semi-negrito */
+    color: #f3f3f3;
+    /* Define a cor do texto como branco */
+    width: 160px;
+    /* Define a largura do botão */
+    height: 40px;
+    /* Define a altura do botão */
+    position: absolute;
+    /* Define a posição como absoluta */
+    bottom: 48px;
+    /* Posiciona o botão a 48px da parte inferior */
+    animation: pulse 1.2s infinite;
+    /* Aplica a animação de pulsação */
+}
+
+
+main>section.main-container>article.image-main-container>button.btn>a {
+    text-decoration: none;
+    color: #f3f3f3;
 }
 
 /* Estiliza o formulário */
-form{
-    background-color: #ffffff; /* Define a cor de fundo do formulário */
-    border: 1px solid #727272; /* Define a borda do formulário */
-    color: #1c1c1c; /* Define a cor do texto dentro do formulário */
-    border-radius: 4px; /* Arredonda as bordas do formulário */
-    height: 320px; /* Define a altura do formulário */
-    width: 520px; /* Define a largura do formulário */
-    display: flex; /* Usa flexbox dentro do formulário */
-    flex-direction: column; /* Organiza os elementos dentro do formulário em coluna */
-    align-items: center; /* Alinha os itens ao centro horizontalmente */
-    justify-content: center; /* Centraliza os itens dentro do formulário verticalmente */
+form.login-form {
+    background-color: #ffffff;
+    /* Define a cor de fundo do formulário */
+    border: 1px solid #727272;
+    /* Define a borda do formulário */
+    color: #1c1c1c;
+    /* Define a cor do texto dentro do formulário */
+    border-radius: 4px;
+    /* Arredonda as bordas do formulário */
+    height: 320px;
+    /* Define a altura do formulário */
+    width: 520px;
+    /* Define a largura do formulário */
+    display: flex;
+    /* Usa flexbox dentro do formulário */
+    flex-direction: column;
+    /* Organiza os elementos dentro do formulário em coluna */
+    align-items: center;
+    /* Alinha os itens ao centro horizontalmente */
+    justify-content: center;
+    /* Centraliza os itens dentro do formulário verticalmente */
 }
 
 /* Estiliza o formulário de cadastro com altura maior */
-form.cadastro-form{
-    height: 420px; /* Define uma altura maior para o formulário de cadastro */
+form.cadastro-form {
+    height: 520px; /* Define uma altura maior para o formulário de cadastro */
 }
 
-form.cadastro-produto-form{
+form.cadastro-produto-form {
+    background-color: #ffffff;
+    border: 1px solid #727272;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     height: 528px;
+    width: 520px;
 }
 
-form.cadastro-produto-form > button#produto-btn{
+form.cadastro-produto-form>button#produto-btn {
     background-color: #ff5c00;
     width: 160px;
     margin-top: 32px;
 }
 
 /* Estiliza os campos de entrada (input) dentro do formulário */
-form input{
-    padding: 0 12px; /* Adiciona preenchimento horizontal aos inputs */
-    outline: 0; /* Remove o contorno do input */
-    border: 1px solid #727272; /* Define a borda dos inputs */
-    border-radius: 4px; /* Arredonda as bordas dos inputs */
-    background-color: #ffffff; /* Define a cor de fundo dos inputs */
-    margin: 4px 0; /* Adiciona margem vertical entre os inputs */
-    width: 260px; /* Define a largura dos inputs */
-    height: 32px; /* Define a altura dos inputs */
+form input {
+    padding: 0 12px;
+    /* Adiciona preenchimento horizontal aos inputs */
+    outline: 0;
+    /* Remove o contorno do input */
+    border: 1px solid #727272;
+    /* Define a borda dos inputs */
+    border-radius: 4px;
+    /* Arredonda as bordas dos inputs */
+    background-color: #ffffff;
+    /* Define a cor de fundo dos inputs */
+    margin: 4px 0;
+    /* Adiciona margem vertical entre os inputs */
+    width: 260px;
+    /* Define a largura dos inputs */
+    height: 32px;
+    /* Define a altura dos inputs */
 }
 
 /* Estiliza o campo de entrada (input) quando está em foco */
-form input:focus{
-    border: 1px solid #ff5c00; /* Altera a cor da borda para laranja quando o input está em foco */
+form input:focus {
+    border: 1px solid #ff5c00;
+    /* Altera a cor da borda para laranja quando o input está em foco */
 }
 
-form textarea#descricao{
+form textarea#descricao {
     padding: 8px 12px;
     width: 260px;
     height: 114px;
 }
 
 /* Estiliza o botão dentro do formulário */
-form button{
-    cursor: pointer; /* Muda o cursor para ponteiro quando passa sobre o botão */
-    color: #f3f3f3; /* Define a cor do texto do botão como branco */
-    width: 130px; /* Define a largura do botão */
-    margin: 4px 0; /* Adiciona margem vertical ao botão */
-    border: none; /* Remove a borda do botão */
-    height: 32px; /* Define a altura do botão */
+form button {
+    cursor: pointer;
+    /* Muda o cursor para ponteiro quando passa sobre o botão */
+    color: #f3f3f3;
+    /* Define a cor do texto do botão como branco */
+    width: 130px;
+    /* Define a largura do botão */
+    margin: 4px 0;
+    /* Adiciona margem vertical ao botão */
+    border: none;
+    /* Remove a borda do botão */
+    height: 32px;
+    /* Define a altura do botão */
 }
 
 /* Estiliza o campo de senha dentro do formulário */
-form input#senha{
-    margin-bottom: 32px; /* Adiciona margem inferior ao campo de senha */
+form input#senha {
+    margin-bottom: 32px;
+    /* Adiciona margem inferior ao campo de senha */
 }
 
 /* Estiliza o botão de envio */
-button[type="submit"]{
-    background-color: #ff5c00; /* Define a cor de fundo do botão de envio */
+button[type="submit"] {
+    background-color: #ff5c00;
+    /* Define a cor de fundo do botão de envio */
 }
 
 /* Estiliza o botão de cadastro */
-button[name="cadastrar"]{
-    background-color: #727272; /* Define a cor de fundo do botão de cadastro */
+button[name="cadastrar"] {
+    background-color: #727272;
+    /* Define a cor de fundo do botão de cadastro */
+}
+
+/* Estiliza o rodapé */
+footer{
+    width: 100vw; /* Define a largura do rodapé como 100% da tela */
+    background-color: #ff5c00; /* Define a cor de fundo do rodapé */
+    color: #f3f3f3; /* Define a cor do texto como branco */
+    display: flex; /* Usa flexbox para o rodapé */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+}
+
+/* Define o layout do container do rodapé */
+footer > section.footer-container{
+    display: flex; /* Exibe o container do rodapé como flex */
+    justify-content: center; /* Centraliza o conteúdo no eixo horizontal */
+    align-items: center; /* Alinha o conteúdo no eixo vertical */
+    width: 70vw; /* Define a largura do container */
+    height: 320px; /* Define a altura do container */
+}
+
+/* Define o layout e estilo das colunas no rodapé */
+footer > section.footer-container > article.local,
+footer > section.footer-container > article.horario,
+footer > section.footer-container > article.contato
+{
+    width: 33.33%; /* Cada coluna ocupa 33% da largura do container */
+    display: flex; /* Usa flexbox nas colunas */
+    flex-direction: column; /* Organiza os itens em coluna */
+    align-items: center; /* Alinha os itens ao centro */
+    justify-content: center; /* Centraliza o conteúdo verticalmente */
+    gap: 24px; /* Define o espaçamento entre os itens */
+}
+
+/* Estiliza os ícones nas colunas do rodapé */
+footer > section.footer-container > article.local > section.row > i.fa-solid,
+footer > section.footer-container > article.horario > section.row > i.fa-solid,
+footer > section.footer-container > article.contato > section.row > i.fa-solid{
+    font-size: 32px; /* Define o tamanho dos ícones */
+    text-align: center; /* Alinha os ícones ao centro */
+}
+
+/* Estiliza o texto nas colunas do rodapé */
+footer > section.footer-container > article.local > p,
+footer > section.footer-container > article.horario > p,
+footer > section.footer-container > article.contato > p{
+    letter-spacing: -0.3px; /* Define o espaçamento entre as letras */
+    width: 80%; /* Define a largura do texto */
+    font-size: 1rem; /* Define o tamanho da fonte */
+}
+
+/* Define a animação de pulsação */
+@keyframes pulse {
+    0%{
+        transform: scale(1); /* Inicia com o tamanho normal */
+    }
+
+    50%{
+        transform: scale(1.03); /* Aumenta um pouco o tamanho */
+    }
+
+    100%{
+        transform: scale(1); /* Retorna ao tamanho original */
+    }
 }
