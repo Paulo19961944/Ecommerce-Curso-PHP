@@ -270,6 +270,11 @@ main>section.main-container>article.image-main-container>button.btn>a {
     color: #f3f3f3;
 }
 
+main > section.main-container > h1.checkout-title{
+    font-size: 2rem;
+    text-align: center;
+}
+
 /* Estiliza o formulário */
 form.login-form {
     background-color: #ffffff;
@@ -315,6 +320,52 @@ form.cadastro-produto-form>button#produto-btn {
     background-color: #ff5c00;
     width: 160px;
     margin-top: 32px;
+}
+
+form.checkout-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 48px 0 96px;
+    background-color: #fff;
+    border: 1px solid #727272;
+    border-radius: 4px;
+    width: 520px;
+    height: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form.checkout-form > input{
+    text-align: center;
+}
+
+form.checkout-form > button.finalizar-checkout{
+    cursor: pointer;
+    border-radius: 2px;
+    width: 160px;
+    margin-top: 48px;
+    background-color: #ff5c00;
+    font-weight: 500;
+}
+
+form.checkout-form > button.finalizar-checkout:hover{
+    animation: pulse 1.2s infinite;
+}
+
+form.checkout-form > button.voltar{
+    cursor: pointer;
+    border-radius: 2px;
+    margin-top: 4px;
+    background-color: #6c7d8f;
+    width: 160px;
+    font-weight: 500;
+}
+
+form.checkout-form > button.voltar:hover{
+    animation: pulse 1.2s infinite;
 }
 
 /* Estiliza os campos de entrada (input) dentro do formulário */

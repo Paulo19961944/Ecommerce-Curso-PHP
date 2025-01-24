@@ -74,6 +74,14 @@
         </section>
     </main>
 
+    <?php
+        $path = $_SERVER["DOCUMENT_ROOT"] . "/ecommerce";
+        
+        if(isset($_POST["voltar"])){
+            header("Location: http://localhost/ecommerce/views/inicio.php");
+        }
+    ?>
+
     <footer>
         <section class="footer-container">
             <article class="horario">
