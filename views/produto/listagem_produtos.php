@@ -20,7 +20,7 @@
                     <li><a href="http://localhost/ecommerce/views/inicio.php">Home</a></li>
                     <li><a href="http://localhost/ecommerce/views/produto/listagem_produtos.php">Produtos</a></li>
                     <li><a href="#">Pedidos</a></li>
-                    <li><a href="#">Carrinho</a></li>
+                    <li><a href="http://localhost/ecommerce/views/carrinho/lista_carrinho.php">Carrinho</a></li>
                 </ul>
             </nav>
         </section>

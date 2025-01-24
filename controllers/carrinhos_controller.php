@@ -5,8 +5,26 @@ include_once($path . "/conexao.php");
 
 class CarrinhosController{
     public function listaProdutos($objproduto){
-        $produtos = $objproduto->Listar();
-        return $produtos;
+        // Obtém os produtos do carrinho com seus preços
+        $produtosCarrinho = $objproduto->Listar();
+        
+        // Calcula o valor total do carrinho
+        $valorTotalCarrinho = 0;
+        foreach ($produtosCarrinho as $produto) {
+            $valorTotalCarrinho += $produto['Preco'] * $produto['Quantidade']; // Calculando o valor total
+        }
+
+        // Retorna os produtos e o valor total
+        return [
+            'produtos' => $produtosCarrinho,
+            'valorTotal' => $valorTotalCarrinho
+        ];
+    }
+    
+
+    public function precoProduto($preco, $quantidade){
+        $preco *= $quantidade;
+        return $preco;
     }
 
     public function adicionarProduto($produtoId, $usuarioId) {

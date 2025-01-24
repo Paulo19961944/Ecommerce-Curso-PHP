@@ -4,23 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina de Inicio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../styles/inicio.css">
+    <title>Pagina de Carrinho</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../styles/inicio.css">
 </head>
 
 <body>
     <header>
         <section class="header-container">
-            <img src="../public/images/Logo-Ecommerce-Sem-Fundo.png" alt="Logotipo da Loja" id="logo">
+            <img src="../../public/images/Logo-Ecommerce-Sem-Fundo.png" alt="Logotipo da Loja" id="logo">
             <nav class="menu-container">
                 <ul id="menu">
                     <li><a href="http://localhost/ecommerce/views/inicio.php">Home</a></li>
                     <li><a href="http://localhost/ecommerce/views/produto/listagem_produtos.php">Produtos</a></li>
                     <li><a href="#">Pedidos</a></li>
-                    <li><a href="#">Carrinho</a></li>
+                    <li><a href="http://localhost/ecommerce/views/carrinho/lista_carrinho.php">Carrinho</a></li>
                 </ul>
             </nav>
         </section>
@@ -28,11 +26,52 @@
 
     <main>
         <section class="carrinho-container">
-            <?php ?>
+            <h1 class="carrinho-title">Meu Carrinho</h1>
+            <?php
+            $path = $_SERVER["DOCUMENT_ROOT"] . '/ecommerce';
+            include_once($path . '/controllers/carrinhos_controller.php');
+
+            $objcarrinhos = new Carrinhos();
+            $carrinhosController = new CarrinhosController();
+            $produtosCarrinho = $carrinhosController->listaProdutos($objcarrinhos)['produtos'];
+            $valorTotalCarrinho = $carrinhosController->listaProdutos($objcarrinhos)['valorTotal'];
+            ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Preço</th>
+                        <th>Preço Total</th>
+                    </tr>
+                </thead>
+                <?php 
+                foreach ($produtosCarrinho as $carrinho) {
+                    // Calculando o preço total para esse produto
+                    $precoTotalProduto = $carrinho['Preco'] * $carrinho['Quantidade'];
+                    echo '<tbody>';
+                    echo '<tr>';
+                    echo '<td> Produto ' . $carrinho['Produto_id'] . '</td>';
+                    echo '<td>' . $carrinho['Quantidade'] . '</td>';
+                    echo '<td>R$ ' . number_format($carrinho['Preco'], 2, ',', '.') . '</td>';
+                    echo '<td>R$ ' . number_format($precoTotalProduto, 2, ',', '.') . '</td>';
+                    echo '</tr>';
+                    echo '</tbody>';
+                }
+                ?>
+                <tfoot>
+                    <tr>
+                        <td colspan="1">Total</td>
+                        <td colspan="2"></td>
+                        <td colspan="1">R$ <?php echo number_format($valorTotalCarrinho, 2, ',', '.'); ?></td>
+                    </tr>
+                </tfoot>
+            </table>
         </section>
     </main>
 
-    <section class="footer-container">
+    <footer>
+        <section class="footer-container">
             <article class="horario">
                 <section class="row">
                     <i class="fa-solid fa-clock"></i>

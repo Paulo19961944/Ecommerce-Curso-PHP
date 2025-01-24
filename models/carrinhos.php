@@ -61,19 +61,31 @@ class Carrinhos {
         mysqli_close($conexao); // Fecha a conexão com o DB
     }
 
-    public function Listar(){
+     // Método para listar os produtos do carrinho
+     public function Listar() {
         $objconexao = new Conexao(); // Instancia a classe Conexao
         $conexao = $objconexao->getConexao(); // Conecta ao DB
-        $arrayCarrinho = [];
-        $sql = "SELECT * FROM Carrinhos"; // Comando SQL para Consulta
-
+        $arrayProdutos = [];
+        $sql = "SELECT * FROM Carrinhos"; // Comando SQL para consulta
+    
         $resposta = mysqli_query($conexao, $sql); // Consulta no DB
-        while($produto = mysqli_fetch_assoc($resposta)){
-            array_push($arrayCarrinho, $produto);
+        while($produtoCarrinho = mysqli_fetch_assoc($resposta)){
+            // Para cada produto, busca o preço na tabela Produtos
+            $produtoId = $produtoCarrinho['Produto_id'];
+            $sqlPreco = "SELECT Valor FROM Produtos WHERE ID = '$produtoId'";
+            $respostaPreco = mysqli_query($conexao, $sqlPreco);
+            if ($respostaPreco && mysqli_num_rows($respostaPreco) > 0) {
+                $produto = mysqli_fetch_assoc($respostaPreco);
+                $produtoCarrinho['Preco'] = $produto['Valor']; // Adiciona o preço ao produto
+            } else {
+                $produtoCarrinho['Preco'] = 0; // Se não encontrar, define como 0
+            }
+
+            array_push($arrayProdutos, $produtoCarrinho); // Adiciona o produto ao carrinho
         }
 
-        mysqli_close($conexao);
-        return $arrayCarrinho;
+        mysqli_close($conexao); // Fecha a conexão
+        return $arrayProdutos; // Retorna os produtos com preço
     }
 }
 ?>

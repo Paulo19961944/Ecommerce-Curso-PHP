@@ -77,7 +77,7 @@ main{
     align-items: center;
 }
 
-main > section.product-container{
+main > section.product-container, main > section.carrinho-container{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,7 +86,7 @@ main > section.product-container{
     margin: 96px 0;
 }
 
-main > section.product-container > h1.product-title{
+main > section.product-container > h1.product-title, main > section.carrinho-container > h1.carrinho-title{
     font-size: 2rem;
     margin-bottom: 48px;
 }
@@ -124,6 +124,37 @@ main > section.product-container > article.product > form > button.comprar{
     height: 40px;
     margin: 48px 0;
     animation: pulse 1.2s infinite; /* Aplica a animação de pulsação */
+}
+
+main > section.carrinho-container > table{
+    width: 720px;
+}
+
+main > section.carrinho-container > table > thead > tr{
+    background-color: #ff5c00;
+    color: #f3f3f3;
+}
+
+main > section.carrinho-container > table > thead > tr > th{
+    padding: 8px;
+}
+
+main > section.carrinho-container > table > tbody > tr {
+    background-color: #eaeaea;
+}
+
+main > section.carrinho-container > table > tbody > tr > td {
+    padding: 8px;
+    text-align: center;
+}
+
+main > section.carrinho-container > table > tfoot > tr{
+    background-color: #eaeaea;
+}
+
+main > section.carrinho-container > table > tfoot > tr > td {
+    padding: 8px;
+    text-align: center;
 }
 
 /* Estiliza o container principal */
