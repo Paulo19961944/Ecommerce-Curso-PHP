@@ -14,6 +14,9 @@ class CarrinhosController {
             $valorTotalCarrinho += $produto['Preco'] * $produto['Quantidade']; // Calculando o valor total
         }
 
+        // Armazena o valor total do carrinho em uma sessão
+        $_SESSION["valorTotalCarrinho"] = $valorTotalCarrinho;
+
         // Retorna os produtos e o valor total
         return [
             'produtos' => $produtosCarrinho,

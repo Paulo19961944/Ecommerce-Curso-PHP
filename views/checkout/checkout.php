@@ -36,18 +36,29 @@
         <label for="rua">Rua</label>
         <input type="text" name="rua" id="rua">
         <label for="numero-rua">Numero</label>
-        <input type="text" name="numero-rua" name="numero-rua">
+        <input type="text" name="numero-rua" id="numero-rua">
         <label for="cidade">Cidade</label>
         <input type="text" name="cidade" id="cidade">
         <label for="estado">Estado</label>
         <input type="text" name="estado" id="estado">
         <button name="finalizar-checkout" class="finalizar-checkout">Faça seu Pedido</button>
-        <button name="voltar" class="voltar">Voltar</button>
+        <button type="button" onclick="window.location.href='http://localhost/ecommerce/views/carrinho/lista_carrinho.php'" class="voltar">Voltar</button>
     </form>
 
     <?php 
-        if(isset($_POST["voltar"])){
-            header("Location: http://localhost/ecommerce/views/carrinho/lista_carrinho.php");
+        session_start();
+        // Verifica se o usuário está logado
+        if (!isset($_SESSION['usuario_id'])) {
+            header("Location: /ecommerce/views/login.php");
+            exit();
+        }
+
+        $path = $_SERVER["DOCUMENT_ROOT"] . "/ecommerce";
+        include_once($path . "/controllers/pedidos_controller.php");
+        $pedidos_controller = new PedidosController ();
+
+        if(isset($_POST["finalizar-checkout"])){
+            $pedidos_controller->AdicionarPedido();
         }
     ?>
 
@@ -77,37 +88,37 @@
         </section>
     </footer>
     <script>
-    document.getElementById('cep').addEventListener('input', () => {
-        const cep = document.getElementById('cep').value.replace(/\D/g, ''); // Remove qualquer caracter não numérico
+        document.getElementById('cep').addEventListener('input', () => {
+            const cep = document.getElementById('cep').value.replace(/\D/g, ''); // Remove qualquer caracter não numérico
 
-        // Verifica se o CEP tem exatamente 8 caracteres
-        if (cep.length === 8) {
-            // Criando a requisição AJAX
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', '../../controllers/checkout_controller.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            // Verifica se o CEP tem exatamente 8 caracteres
+            if (cep.length === 8) {
+                // Criando a requisição AJAX
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '../../controllers/checkout_controller.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-            // Função para tratar a resposta
-            xhr.onload = () => {
-                if (xhr.status === 200) {
-                    const response = JSON.parse(xhr.responseText);
-                    if (response.erro) {
-                        alert('CEP não encontrado');
+                // Função para tratar a resposta
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.erro) {
+                            alert('CEP não encontrado');
+                        } else {
+                            // Preencher os campos com os dados retornados pela API
+                            document.getElementById('rua').value = response.rua;
+                            document.getElementById('cidade').value = response.cidade;
+                            document.getElementById('estado').value = response.estado;
+                        }
                     } else {
-                        // Preencher os campos com os dados retornados pela API
-                        document.getElementById('rua').value = response.rua;
-                        document.getElementById('cidade').value = response.cidade;
-                        document.getElementById('estado').value = response.estado;
+                        alert('Erro ao buscar o CEP');
                     }
-                } else {
-                    alert('Erro ao buscar o CEP');
-                }
-            };
+                };
 
-            // Enviar o CEP para a requisição
-            xhr.send(`cep=${cep}`);
-        }
-    });
+                // Enviar o CEP para a requisição
+                xhr.send(`cep=${cep}`);
+            }
+        });
     </script>
 
 </body>
