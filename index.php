@@ -3,6 +3,7 @@
     $path = $_SERVER["DOCUMENT_ROOT"] . '/ecommerce'; // Caminho Padrão da Página
     include_once($path . '/controllers/usuario_controller.php'); // Importa o Controller
     include_once($path . '/models/produto.php');
+    include_once($path . '/models/pedido.php');
 
     // Se o botão de login for clicado
     if(isset($_POST["logar"])){
@@ -14,10 +15,13 @@
 
         // Objeto Produto
         $objproduto = new Produto();
+
+        // Objeto Pedido
+        $objpedido = new Pedidos();
     
         // Controller Usuario
         $controllerusuario = new UsuarioController(); // Cria o controlador de usuário
-        $resposta = $controllerusuario->login($objusuario, $objproduto); // Chama a validação e login do usuário
+        $resposta = $controllerusuario->login($objusuario, $objproduto, $objpedido); // Chama a validação e login do usuário
     
         if($resposta === true){
             // Redireciona para a página inicial após o login

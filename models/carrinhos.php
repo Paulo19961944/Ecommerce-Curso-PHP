@@ -67,8 +67,8 @@ class Carrinhos {
         $conexao = $objconexao->getConexao(); // Conecta ao DB
         $arrayProdutos = [];
         $sql = "SELECT * FROM Carrinhos"; // Comando SQL para consulta
-    
         $resposta = mysqli_query($conexao, $sql); // Consulta no DB
+        
         while($produtoCarrinho = mysqli_fetch_assoc($resposta)){
             // Para cada produto, busca o preço na tabela Produtos
             $produtoId = $produtoCarrinho['Produto_id'];

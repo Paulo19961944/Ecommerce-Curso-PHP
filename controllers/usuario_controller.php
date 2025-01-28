@@ -25,7 +25,7 @@ class UsuarioController{
     }
 
     // Função de fazer o Login
-    public function login($objusuario, $objproduto){
+    public function login($objusuario, $objproduto, $objpedido){
         // Verifica se o email e senha são válidos
         if(empty($objusuario->getEmail()) || strlen($objusuario->getEmail()) > 100){
             return "Email Inválido";
@@ -43,6 +43,8 @@ class UsuarioController{
             $_SESSION['user_ip'] = $_SERVER['REMOTE_ADDR']; // Armazena o IP do dispositivo
             $_SESSION["usuario_id"] = $objusuario->getId();
             $_SESSION["produto_id"] = $objproduto->getId();
+            $_SESSION["pedido_id"] = $objpedido->getId();
+
             return true;
         } else {
             return $loginResult;
