@@ -3,7 +3,7 @@
     $path = $_SERVER["DOCUMENT_ROOT"] . '/ecommerce'; // Caminho Padrão da Página
     include_once($path . '/controllers/usuario_controller.php'); // Importa o Controller
     include_once($path . '/models/produto.php');
-    include_once($path . '/models/pedido.php');
+    include_once($path . '/models/pedidos.php');
 
     // Se o botão de login for clicado
     if(isset($_POST["logar"])){

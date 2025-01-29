@@ -277,7 +277,7 @@ main > section.main-container > h1.checkout-title{
 }
 
 /* Estiliza o formulário */
-form.login-form {
+form.login-form, form.cadastro-form  {
     background-color: #ffffff;
     /* Define a cor de fundo do formulário */
     border: 1px solid #727272;
@@ -302,7 +302,7 @@ form.login-form {
 
 /* Estiliza o formulário de cadastro com altura maior */
 form.cadastro-form {
-    height: 520px; /* Define uma altura maior para o formulário de cadastro */
+    height: 420px; /* Define uma altura maior para o formulário de cadastro */
 }
 
 form.cadastro-produto-form {
