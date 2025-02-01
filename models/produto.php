@@ -80,16 +80,26 @@
             $objconexao = new Conexao(); // Instancia a classe Conexao
             $conexao = $objconexao->getConexao(); // Conecta ao DB
             $arrayProdutos = []; // Cria uma Lista de Produtos
-            $sql = "SELECT * FROM Produtos"; // Comando SQL para Consulta
-    
-            $resposta = mysqli_query($conexao, $sql); // Consulta no DB
+
+            // Prepara o SQL (sem parâmetros, mas ainda com prepared statement)
+            $sql = "SELECT * FROM Produtos";
+            $stmt = $conexao->prepare($sql);
+
+            // Executa a consulta
+            $stmt->execute();
+
+            // Obtém o resultado
+            $resposta = $stmt->get_result();
 
             // Enquanto tiver respostas
-            while($produto = mysqli_fetch_assoc($resposta)){
+            while($produto = $resposta->fetch_assoc()){
                 array_push($arrayProdutos, $produto); // Insere o produto na lista
             }
 
-            mysqli_close($conexao); // Fecha a Conexão
+            // Fecha a declaração e a conexão
+            $stmt->close();
+            $conexao->close();
+
             return $arrayProdutos; // Retorna a Lista de Produtos
         }
 
@@ -98,18 +108,24 @@
             $objconexao = new Conexao(); // Instancia a Classe Conexão
             $conexao = $objconexao->getConexao(); // Cria uma Conexão com o BD
 
-            // Insere na Tabela Produtos a Descrição, o Valor, a Categoria e a Quantidade
-            $sql = "INSERT INTO Produtos (Descricao,Valor,Categoria,Quantidade) 
-                    VALUES('$this->descricao', '$this->valor', '$this->categoria', '$this->quantidade')"; // Comando SQL
+            // Prepara a consulta SQL com placeholders para os valores
+            $sql = "INSERT INTO Produtos (Descricao, Valor, Categoria, Quantidade) 
+                    VALUES (?, ?, ?, ?)";
+            $stmt = $conexao->prepare($sql);
 
-            // Se ocorrer tudo bem
-            if(mysqli_query($conexao, $sql)){
+            // Vincula os parâmetros (ssss = string, string, string, integer)
+            $stmt->bind_param("ssss", $this->descricao, $this->valor, $this->categoria, $this->quantidade);
+
+            // Executa a consulta
+            if($stmt->execute()){
+                $stmt->close();
+                $conexao->close();
                 return "Sucesso"; // Retorna sucesso
-            } else{
+            } else {
+                $stmt->close();
+                $conexao->close();
                 return "Erro"; // Retorna mensagem de erro
             }
-            mysqli_close($conexao); // Fecha a conexão com o DB
         }
-
     }
 ?>

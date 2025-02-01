@@ -81,10 +81,18 @@ class Usuario{
         $objconexao = new Conexao(); // Instância do Objeto Conexão
         $conexao = $objconexao->getConexao(); // Conexão com o DB
 
-        // Busca o ID, Nome, Email, Senha e Chave do usuário na tabela Usuarios
-        $sql = "SELECT ID, Nome, Email, Senha, Chave FROM Usuarios WHERE email = '".$this->getEmail()."'";
+        // Prepara a consulta com um placeholder para o email
+        $sql = "SELECT ID, Nome, Email, Senha, Chave FROM Usuarios WHERE email = ?";
+        $stmt = $conexao->prepare($sql);
 
-        $resposta = $conexao->query($sql); // Insere o Comando SQL
+        // Vincula o parâmetro (s = string) para o email
+        $stmt->bind_param("s", $this->getEmail());
+
+        // Executa a consulta
+        $stmt->execute();
+
+        // Obtém o resultado
+        $resposta = $stmt->get_result();
         $usuario = $resposta->fetch_assoc(); // Busca a Resposta do Usuário
 
         // Validação do usuário
@@ -98,6 +106,10 @@ class Usuario{
             $this->setId($usuario["ID"]);
             return true; // Retorna true se login for bem-sucedido
         }
+
+        // Fecha a declaração e a conexão
+        $stmt->close();
+        $conexao->close();
     }
 
     // Cadastra o Usuário
@@ -105,16 +117,23 @@ class Usuario{
         $objconexao = new Conexao(); // Instância da Classe Conexão
         $conexao = $objconexao->getConexao(); // Conecta com o DB
 
-        // Insere na Tabela Usuarios o Nome, Email, Senha e a chave gerada
-        $sql = "INSERT INTO Usuarios (Nome, Email, Senha, Chave) VALUES('$this->nome', '$this->email', '$this->senha', '$this->key')";
+        // Prepara a consulta com placeholders para os valores a serem inseridos
+        $sql = "INSERT INTO Usuarios (Nome, Email, Senha, Chave) VALUES (?, ?, ?, ?)";
+        $stmt = $conexao->prepare($sql);
 
-        // Verifica se a conexão foi bem sucedida
-        if(mysqli_query($conexao, $sql)){
+        // Vincula os parâmetros (ssss = string, string, string, string)
+        $stmt->bind_param("ssss", $this->nome, $this->email, $this->senha, $this->key);
+
+        // Executa a consulta
+        if($stmt->execute()){
             return "Sucesso";
         } else{
             return "Erro";
         }
-        mysqli_close($conexao);
+
+        // Fecha a declaração e a conexão
+        $stmt->close();
+        $conexao->close();
     }
 }
 ?>
