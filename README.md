@@ -29,11 +29,11 @@ Para criar a tabela de usuários devemos seguir os seguintes passos:
 1. Abra o seu XAMPP e habilite o Apache e o MYSQL
 2. [Clique aqui para entrar no seu painel de administrador](http://localhost/phpmyadmin)
 3. Clique no botão Novo
-4. De o nome do Banco de Dados como Usuarios e clique em criar
+4. De o nome do Banco de Dados como ecommerce e clique em criar
 5. Clique em SQL e insira o seguinte comando:
 ```sql
 CREATE TABLE Usuarios(
-    ID int PRIMARY_KEY NOT NULL AUTO_INCREMENT,
+    ID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     Nome varchar(100) NOT NULL,
     Email varchar(100) NOT NULL,
     Senha varchar(100) NOT NULL,
@@ -43,13 +43,12 @@ CREATE TABLE Usuarios(
 ```
 
 ## CRIANDO A TABELA DE PRODUTOS
-1. Clique no botão Novo
-2. De o nome do Banco de Dados como Produtos e clique em criar
-3. Clique em SQL e insira o seguinte comando:
+1. Clique no ecommerce
+2. Clique em SQL e insira o seguinte comando:
 
 ```sql
 CREATE TABLE Produtos(
-    ID int PRIMARY_KEY NOT NULL AUTO_INCREMENT,
+    ID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     Descricao varchar(250) NOT NULL,
     Valor double NOT NULL,
     Categoria varchar(100),
@@ -59,13 +58,12 @@ CREATE TABLE Produtos(
 
 ## CRIANDO A TABELA DE PEDIDOS
 
-1. Clique no botão Novo
-2. De o nome do Banco de Dados como Pedidos e clique em criar
-3. Clique em SQL e insira o seguinte comando:
+1. Clique no ecommerce
+2. Clique em SQL e insira o seguinte comando:
 
 ```sql
 CREATE TABLE Pedidos(
-    ID int PRIMARY_KEY NOT NULL AUTO_INCREMENT,
+    ID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     Valor double NOT NULL,
     Status varchar(100),
     Usuario_id int NOT NULL,
@@ -74,9 +72,8 @@ CREATE TABLE Pedidos(
 ```
 
 ## CRIANDO A TABELA DE CARRINHOS
-1. Clique no botão Novo
-2. De o nome do Banco de Dados como Carrinhos e clique em criar
-3. Clique em SQL e insira o seguinte comando:
+1. Clique no ecommerce
+2. Clique em SQL e insira o seguinte comando:
 
 ```sql
 CREATE TABLE Carrinhos(
@@ -90,9 +87,8 @@ CREATE TABLE Carrinhos(
 
 ## CRIANDO A TABELA DE PRODUTOS PEDIDOS
 
-1. Clique no botão Novo
-2. De o nome do Banco de Dados como Produtos_Pedidos e clique em criar
-3. Clique em SQL e insira o seguinte comando:
+1. Clique no ecommerce
+2. Clique em SQL e insira o seguinte comando:
 
 ```sql
 CREATE TABLE Produtos_Pedidos(
