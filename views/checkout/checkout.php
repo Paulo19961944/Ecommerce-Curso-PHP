@@ -46,19 +46,27 @@
     </form>
 
     <?php 
+        // Inicializa a Sessão
         session_start();
+    
         // Verifica se o usuário está logado
         if (!isset($_SESSION['usuario_id'])) {
             header("Location: /ecommerce/views/login.php");
             exit();
         }
 
+        // Caminho Principal da Página
         $path = $_SERVER["DOCUMENT_ROOT"] . "/ecommerce";
+
+        // Importa a Classe Pedido Controller
         include_once($path . "/controllers/pedidos_controller.php");
+        
+        // Instância dos Objetos do Pedidos Controller
         $pedidos_controller = new PedidosController ();
 
+        // Se clicar no botão de finalizar checkout
         if(isset($_POST["finalizar-checkout"])){
-            $pedidos_controller->AdicionarPedido();
+            $pedidos_controller->AdicionarPedido(); // Adiciona o Pedido
         }
     ?>
 
@@ -88,6 +96,7 @@
         </section>
     </footer>
     <script>
+        // Evento de Input
         document.getElementById('cep').addEventListener('input', () => {
             const cep = document.getElementById('cep').value.replace(/\D/g, ''); // Remove qualquer caracter não numérico
 

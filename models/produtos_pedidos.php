@@ -1,6 +1,6 @@
 <?php 
     $path = $_SERVER["DOCUMENT_ROOT"] . "/ecommerce"; // Define o Caminho Principal
-    include_once($path . "/conexao.php");
+    include_once($path . "/conexao.php"); // Importa a Classe Conexão
 
     class ProdutosPedidos {
         private $id;
@@ -41,13 +41,16 @@
             $this->valor = $valor;
         }
 
+        // Cadastra os Produtos Pedidos
         public function cadastrar($produto_id, $pedido_id){
             $objconexao = new Conexao(); // Importa o Objeto Conexão
             $conexao = $objconexao->getConexao(); // Conecta ao DB
 
+            // Insere o ID, Produto_id, Pedidos_id e Valor na Tabela Produto Pedidos
             $sql = "INSERT INTO Produtos_Pedidos(ID, Produto_id, Pedidos_id, Valor) VALUES (?, ?, ?, ?)";
             $stmt = $conexao->prepare($sql);
             $stmt->bind_param('dii', $this->id, $_SESSION["produtoId"], $_SESSION["pedidoId"], $_SESSION["valorTotalCarrinho"]);
+
 
             if($stmt->execute()){
                 return true;

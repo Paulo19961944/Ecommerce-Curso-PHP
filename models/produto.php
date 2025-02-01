@@ -79,16 +79,18 @@
         public function Listar(){
             $objconexao = new Conexao(); // Instancia a classe Conexao
             $conexao = $objconexao->getConexao(); // Conecta ao DB
-            $arrayProdutos = [];
+            $arrayProdutos = []; // Cria uma Lista de Produtos
             $sql = "SELECT * FROM Produtos"; // Comando SQL para Consulta
     
             $resposta = mysqli_query($conexao, $sql); // Consulta no DB
+
+            // Enquanto tiver respostas
             while($produto = mysqli_fetch_assoc($resposta)){
-                array_push($arrayProdutos, $produto);
+                array_push($arrayProdutos, $produto); // Insere o produto na lista
             }
 
-            mysqli_close($conexao);
-            return $arrayProdutos;
+            mysqli_close($conexao); // Fecha a Conexão
+            return $arrayProdutos; // Retorna a Lista de Produtos
         }
 
         // Função para cadastrar um produto
@@ -96,6 +98,7 @@
             $objconexao = new Conexao(); // Instancia a Classe Conexão
             $conexao = $objconexao->getConexao(); // Cria uma Conexão com o BD
 
+            // Insere na Tabela Produtos a Descrição, o Valor, a Categoria e a Quantidade
             $sql = "INSERT INTO Produtos (Descricao,Valor,Categoria,Quantidade) 
                     VALUES('$this->descricao', '$this->valor', '$this->categoria', '$this->quantidade')"; // Comando SQL
 

@@ -49,6 +49,7 @@ class Carrinhos {
         $objconexao = new Conexao(); // Instancia a Classe Conexão
         $conexao = $objconexao->getConexao(); // Cria uma Conexão com o BD
 
+        // Insere na Tabela Carrinhos o ID, Usuario_id, Produto_id e a Quantidade
         $sql = "INSERT INTO Carrinhos (ID,Usuario_id,Produto_id,Quantidade) 
                 VALUES('$this->id', '$this->usuario_id', '$this->produto_id', '$this->quantidade')"; // Comando SQL
 

@@ -1,7 +1,7 @@
 <?php 
 
-$path = $_SERVER["DOCUMENT_ROOT"].'/ecommerce';
-include_once($path."/conexao.php");
+$path = $_SERVER["DOCUMENT_ROOT"].'/ecommerce'; // Define o caminho principal da página
+include_once($path."/conexao.php"); // Importa a Classe Conexão
 
 class Usuario{
     private $id;
@@ -48,14 +48,16 @@ class Usuario{
     }
 
     public function Login(){
-        $objconexao = new Conexao();
-        $conexao = $objconexao->getConexao();
+        $objconexao = new Conexao(); // Instância do Objeto Conexão
+        $conexao = $objconexao->getConexao(); // Conexão com o DB
 
+        // Busca o ID, Nome, Email, Senha da Tabela Usuários se o email for do usuário
         $sql = "SELECT ID, Nome, Email, Senha FROM Usuarios WHERE email = '".$this->getEmail()."'";
 
-        $resposta = $conexao->query($sql);
-        $usuario = $resposta->fetch_assoc();
+        $resposta = $conexao->query($sql); // Insere o Comando SQL
+        $usuario = $resposta->fetch_assoc(); // Busca a Resposta do Usuário
 
+        // Validação do usuário
         if(!$usuario){
             return "Email não cadastrado";
         } 
@@ -68,12 +70,15 @@ class Usuario{
         }
     }
 
+    // Cadastra o Usuário
     public function Cadastrar(){
-        $objconexao = new Conexao();
-        $conexao = $objconexao->getConexao();
+        $objconexao = new Conexao(); // Instância da Classe Conexão
+        $conexao = $objconexao->getConexao(); // Conecta com o DB
 
+        // Insere na Tabela Usuarios o Nome, Email e Senha
         $sql = "INSERT INTO Usuarios (Nome, Email, Senha) VALUES('$this->nome', '$this->email', '$this->senha')";
 
+        // Verifica se a conexão foi bem sucedida
         if(mysqli_query($conexao, $sql)){
             return "Sucesso";
         } else{

@@ -30,17 +30,18 @@
         <section class="product-container">
             <h1 class="product-title">Produtos</h1>
             <?php
-            $path = $_SERVER["DOCUMENT_ROOT"] . '/ecommerce';
-            include_once($path . '/controllers/produto_controller.php');
-            include_once($path . '/controllers/carrinhos_controller.php');
-            session_start();
+            $path = $_SERVER["DOCUMENT_ROOT"] . '/ecommerce'; // Define o Caminho Principal da Página
+            include_once($path . '/controllers/produto_controller.php'); // Importa a Classe Produto Controller
+            include_once($path . '/controllers/carrinhos_controller.php'); // Importa a Classe Carrinhos Controller
+            session_start(); // Inicializa a Sessão
 
-            $objproduto = new Produto();
-            $produtoController = new ProdutoController();
-            $produtos = $produtoController->listaProdutos($objproduto);
+            $objproduto = new Produto(); // Objeto do Produto
+            $produtoController = new ProdutoController(); // Objeto do Produto Controller
+            $produtos = $produtoController->listaProdutos($objproduto); // Lista os Produtos
             ?>
     
             <?php
+            // Retorna os Produtos Individualmente
             foreach ($produtos as $produto) {
                 echo "<article class=\"product\">";
                     echo "<h2>";
@@ -82,9 +83,9 @@
             <?php 
             if (isset($_POST["comprar"])) {
                 $produtoId = $_POST["produto_id"]; // Pega o produto ID do formulário
-                $usuarioId = $_SESSION["usuario_id"]; // Usuário já está na sessão
-                $objcarrinho = new CarrinhosController();
-                $objcarrinho->adicionarProduto($produtoId, $usuarioId);
+                $usuarioId = $_SESSION["usuario_id"]; // Pega o Usuário ID
+                $objcarrinho = new CarrinhosController(); // Instância do Carrinhos Controller
+                $objcarrinho->adicionarProduto($produtoId, $usuarioId); // Adiciona os Produtos ao Carrinho
             }
             ?>
 

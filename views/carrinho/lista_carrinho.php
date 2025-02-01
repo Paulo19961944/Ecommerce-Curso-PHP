@@ -28,11 +28,17 @@
         <section class="carrinho-container">
             <h1 class="carrinho-title">Meu Carrinho</h1>
             <?php
+            // Caminho Principal
             $path = $_SERVER["DOCUMENT_ROOT"] . '/ecommerce';
+            
+            // Importa a Classe Carrinhos Controller
             include_once($path . '/controllers/carrinhos_controller.php');
 
+            // Instância o Objeto do Carrinhos e do Carrinhos Controller
             $objcarrinhos = new Carrinhos();
             $carrinhosController = new CarrinhosController();
+
+            // Lista os produtos do carrinho e o valor total
             $produtosCarrinho = $carrinhosController->listaProdutos($objcarrinhos)['produtos'];
             $valorTotalCarrinho = $carrinhosController->listaProdutos($objcarrinhos)['valorTotal'];
             ?>
@@ -75,12 +81,14 @@
     </main>
 
     <?php
-        $path = $_SERVER["DOCUMENT_ROOT"] . "/ecommerce";
+        $path = $_SERVER["DOCUMENT_ROOT"] . "/ecommerce"; // Caminho Principal
         
+        // Se clicar em voltar, envia para a Listagem dos Produtos
         if(isset($_POST["voltar"])){
             header("Location: http://localhost/ecommerce/views/produto/listagem_produtos.php");
         }
 
+        // Se clicar em Finalizar, enviar para a página de checkout
         if(isset($_POST["finalizar"])){
             header("Location: http://localhost/ecommerce/views/checkout/checkout.php");
         }

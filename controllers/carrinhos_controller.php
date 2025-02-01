@@ -24,6 +24,7 @@ class CarrinhosController {
         ];
     }
     
+    // Retorna o Preço Total do Produto
     public function precoProduto($preco, $quantidade) {
         $preco *= $quantidade;
         return $preco;

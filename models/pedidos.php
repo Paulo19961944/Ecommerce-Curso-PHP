@@ -1,13 +1,15 @@
 <?php 
-$path = $_SERVER["DOCUMENT_ROOT"].'/ecommerce';
-include_once($path."/conexao.php");
+$path = $_SERVER["DOCUMENT_ROOT"].'/ecommerce'; // Caminho Principal da Página
+include_once($path."/conexao.php"); // Importa a Classe de Conexão
 
 class Pedidos {
+    // Atributos da Classe
     private $id;
     private $valor;
     private $status;
     private $usuario_id;
 
+    // Getters and Setters
     public function getId() {
         return $this->id;
     }
@@ -40,11 +42,13 @@ class Pedidos {
         $this->usuario_id = $usuario_id;
     }
 
+    // Cadastra um Pedido
     public function cadastrar() {
-        session_start();
-        $objconexao = new Conexao();
-        $conexao = $objconexao->getConexao();
+        session_start(); // Inicializa a Sessão
+        $objconexao = new Conexao(); // Instância da Classe Conexão
+        $conexao = $objconexao->getConexao(); // Conecta ao DB
 
+        // Insere na Tabela Pedidos o Valor, o Status, o Usuario_id
         $sql = "INSERT INTO Pedidos (Valor, Status, Usuario_id) VALUES (?, ?, ?)";
         $stmt = $conexao->prepare($sql);
 

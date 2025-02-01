@@ -9,6 +9,7 @@ class UsuarioController{
         $objusuario->setEmail($_POST["email"]);  // Define o Email
         $objusuario->setSenha($_POST["senha"]);  // Define a Senha do Usuario
 
+        // Validações
         if(empty($objusuario->getNome()) || strlen($objusuario->getNome()) > 100){
             echo "Nome Inválido";
         }
@@ -35,15 +36,15 @@ class UsuarioController{
             return "Senha Inválida";
         }
     
-        $loginResult = $objusuario->Login();
+        $loginResult = $objusuario->Login(); // Faz o Login do Usuário
     
         if ($loginResult === true) {
             // Registra o login do usuário
-            $_SESSION['usuarioLogged'] = true; // A sessão agora é definida corretamente
+            $_SESSION['usuarioLogged'] = true; // Define o Usuario como True
             $_SESSION['user_ip'] = $_SERVER['REMOTE_ADDR']; // Armazena o IP do dispositivo
-            $_SESSION["usuario_id"] = $objusuario->getId();
-            $_SESSION["produto_id"] = $objproduto->getId();
-            $_SESSION["pedido_id"] = $objpedido->getId();
+            $_SESSION["usuario_id"] = $objusuario->getId(); // Armazena o Usuario_id
+            $_SESSION["produto_id"] = $objproduto->getId(); // Armazena o Produto_id
+            $_SESSION["pedido_id"] = $objpedido->getId(); // Armazena o Pedido_id
 
             return true;
         } else {
@@ -53,8 +54,9 @@ class UsuarioController{
 
     // Função para Validar o Usuário
     public function validaUsuario($objusuario){
+        // Verifica se o Email e a Senha são Válidos
         if(validaEmail($objusuario->getEmail()) && validaSenha($objusuario->getSenha())){
-            $objusuario->setUsuarioLogged(true);
+            $objusuario->setUsuarioLogged(true); // Define o Usuario Logged como True
             return $objusuario->Login(); // Chama o método de login
         }
         if(empty($objusuario->getSenha()) || strlen($objusuario->getSenha()) > 100){
@@ -65,6 +67,7 @@ class UsuarioController{
 
 // Função para validar o email
 function validaEmail($email){
+    // Verifica se o email não está vazio e se tem no máximo 100 caracteres
     if(empty($email)){
         echo "O email é obrigatório";
         return false;
@@ -78,6 +81,7 @@ function validaEmail($email){
 
 // Função para validar a senha
 function validaSenha($senha){
+    // Verifica se a Senha não está vazia e se não tem mais de 100 caracteres
     if(empty($senha)){
         echo "A senha é obrigatória";
         return false;
