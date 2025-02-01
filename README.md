@@ -8,7 +8,7 @@ Primeiramente devemos fazer um clone desse diretório com o seguinte comando:
 ```bash
     git clone https://github.com/Paulo19961944/Ecommerce-Curso-PHP ecommerce
 ```
-<br></br>
+
 Depois de clonado o repositório, precisamos entrar na nossa pasta com o seguinte comando:
 
 ```bash
