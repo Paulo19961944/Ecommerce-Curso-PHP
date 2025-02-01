@@ -7,7 +7,7 @@ class UsuarioController{
     public function cadastraUsuario($objusuario){
         $objusuario->setNome($_POST["nome"]);  // Define um Nome
         $objusuario->setEmail($_POST["email"]);  // Define o Email
-        $objusuario->setSenha($_POST["senha"]);  // Define a Senha do Usuario
+        $objusuario->setSenha($_POST["senha"]);  // Define a Senha do Usuario (a senha será criptografada aqui)
 
         // Validações
         if(empty($objusuario->getNome()) || strlen($objusuario->getNome()) > 100){
@@ -20,7 +20,7 @@ class UsuarioController{
             echo "Senha Inválida";
         }
         else{
-            $objusuario->Cadastrar(); 
+            $objusuario->Cadastrar();  // Cadastra o usuário (senha já foi criptografada dentro do modelo)
             return "Sucesso"; 
         }
     }
