@@ -22,6 +22,89 @@ Dentro de nossa pasta ecommerce devemos instalar o composer com o comando:
 ```
 **OBS:** Certifique-se que tenha o composer instalado em sua máquina
 
+## CRIANDO A TABELA DE USUÁRIOS
+
+Para criar a tabela de usuários devemos seguir os seguintes passos:
+
+1. Abra o seu XAMPP e habilite o Apache e o MYSQL
+2. [Clique aqui para entrar no seu painel de administrador](http://localhost/phpmyadmin)
+3. Clique no botão Novo
+4. De o nome do Banco de Dados como Usuarios e clique em criar
+5. Clique em SQL e insira o seguinte comando:
+```sql
+CREATE TABLE Usuarios(
+    ID int PRIMARY_KEY NOT NULL AUTO_INCREMENT,
+    Nome varchar(100) NOT NULL,
+    Email varchar(100) NOT NULL,
+    Senha varchar(100) NOT NULL,
+    Endereco varchar(100) NOT NULL,
+    Chave varchar(255) NOT NULL
+);
+```
+
+## CRIANDO A TABELA DE PRODUTOS
+1. Clique no botão Novo
+2. De o nome do Banco de Dados como Produtos e clique em criar
+3. Clique em SQL e insira o seguinte comando:
+
+```sql
+CREATE TABLE Produtos(
+    ID int PRIMARY_KEY NOT NULL AUTO_INCREMENT,
+    Descricao varchar(250) NOT NULL,
+    Valor double NOT NULL,
+    Categoria varchar(100),
+    Quantidade double NOT NULL
+);
+```
+
+## CRIANDO A TABELA DE PEDIDOS
+
+1. Clique no botão Novo
+2. De o nome do Banco de Dados como Pedidos e clique em criar
+3. Clique em SQL e insira o seguinte comando:
+
+```sql
+CREATE TABLE Pedidos(
+    ID int PRIMARY_KEY NOT NULL AUTO_INCREMENT,
+    Valor double NOT NULL,
+    Status varchar(100),
+    Usuario_id int NOT NULL,
+    FOREIGN KEY (Usuario_id) REFERENCES Usuarios(id)
+);
+```
+
+## CRIANDO A TABELA DE CARRINHOS
+1. Clique no botão Novo
+2. De o nome do Banco de Dados como Carrinhos e clique em criar
+3. Clique em SQL e insira o seguinte comando:
+
+```sql
+CREATE TABLE Carrinhos(
+    ID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    Usuario_id int NOT NULL,
+    Produto_id int NOT NULL,
+    FOREIGN KEY (Usuario_id) REFERENCES Usuarios(id),
+    FOREIGN KEY (Produto_id) REFERENCES Produtos(id)
+);
+```
+
+## CRIANDO A TABELA DE PRODUTOS PEDIDOS
+
+1. Clique no botão Novo
+2. De o nome do Banco de Dados como Produtos_Pedidos e clique em criar
+3. Clique em SQL e insira o seguinte comando:
+
+```sql
+CREATE TABLE Produtos_Pedidos(
+    ID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    Produto_id int NOT NULL,
+    Pedido_id int NOT NULL,
+    Valor double NOT NULL,
+    FOREIGN KEY (Produto_id) REFERENCES Produtos(id),
+    FOREIGN KEY (Pedido_id) REFERENCES Pedidos(id)
+);
+```
+
 ## DECLARANDO VARIÁVEIS DE AMBIENTE
 Dentro de nosso projeto, necessitamos instalar as váriáveis de ambiente para que funcione em nosso projeto, para isso criamos um _arquivo .env_ na raiz de nosso diretório.
 
@@ -41,5 +124,17 @@ Depois de criado o arquivo, nomeamos conforme a tabela abaixo:
 
 Feito isso podemos começar a testar o nosso código.
 
-### CONCLUSÃO
+
+**OBS:** O projeto deve estar na pasta htdocs do seu XAMPP, será necessário a instalação do XAMPP. Em breve farei um vídeo mostrando a instalação do XAMPP e de como utilizar em seu projeto
+
+
+## TESTANDO O CÓDIGO
+1. Abra o seu XAMPP e clique em MYSQL e no Apache para inicializar o seu servidor
+2. [Clique Aqui para inicializar o seu Servidor](http://localhost/ecommerce)
+3. Cadastre o seu usuário, como ainda estou mexendo [Clique Aqui](http://localhost/ecommerce/views/usuario/cadastro_usuario.php)
+4. Cadastrado o usuário é só fazer o login
+5. Explore as funcionalidades do código
+
+
+## CONCLUSÃO
 Foi um projeto bacana, porém ele não está 100% pronto e estou mexendo nele aos poucos. Pra mim foi desafiador pelo sentido que nunca fiz uma aplicação dessa em PHP Puro, e estou em constante aprendizado, porém me sinto realizado ao fazer um projeto desses
