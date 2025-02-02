@@ -80,6 +80,7 @@ CREATE TABLE Carrinhos(
     ID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
     Usuario_id int NOT NULL,
     Produto_id int NOT NULL,
+    Quantidade double NOT NULL,
     FOREIGN KEY (Usuario_id) REFERENCES Usuarios(id),
     FOREIGN KEY (Produto_id) REFERENCES Produtos(id)
 );
