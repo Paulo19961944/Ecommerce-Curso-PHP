@@ -10,7 +10,7 @@ class Usuario{
     private $senha;
     private $endereco;
     private $usuarioLogged;
-    private $key; // Adicionada a propriedade $key
+    private $key;
 
     private $iv_length = 16;  // Tamanho do vetor de inicialização (IV) para AES-256-CBC
 
@@ -67,24 +67,30 @@ class Usuario{
         // Decodifica a senha armazenada em uma variável
         $decodedSenha = base64_decode($this->senha);
 
-        // Separa a senha criptografada e o IV armazenado, usando uma variável intermediária
-        $parts = explode("::", $decodedSenha); // Aqui usamos uma variável intermediária
+        // Separa a senha criptografada e o IV armazenado
+        $parts = explode("::", $decodedSenha);
 
         // Verifica se o explode retornou o número correto de partes
         if (count($parts) !== 2) {
             return "Formato inválido da senha armazenada.";
         }
 
-        // Agora, podemos usar o list() com a variável intermediária
+        // Desempacota a senha criptografada e o IV
         list($encrypted_password, $encrypted_iv) = $parts;
         $iv = base64_decode($encrypted_iv);
 
-        // Descriptografa a senha usando a chave do usuário
-        $key = base64_decode($userKey);  // A chave gerada e armazenada no banco
+        // Recupera a chave armazenada e decodifica em base64
+        $key = base64_decode($userKey);  // A chave do usuário (decodificada de base64)
+
+        // Descriptografa a senha usando a chave e o IV
         $decrypted_password = openssl_decrypt($encrypted_password, 'AES-256-CBC', $key, 0, $iv);
 
         // Compara a senha fornecida com a senha descriptografada
-        return $decrypted_password === $senha;
+        if (trim($decrypted_password) === trim($senha)) {
+            return true;  // Senha correta
+        } else {
+            return "Senha Incorreta";  // Senha incorreta
+        }
     }
 
     // Método de Login
@@ -92,7 +98,7 @@ class Usuario{
         $objconexao = new Conexao(); // Instância do Objeto Conexão
         $conexao = $objconexao->getConexao(); // Conexão com o DB
 
-        // Certifique-se de que o email foi corretamente atribuído
+        // Valida o Email
         $email = $this->getEmail();
         if (empty($email)) {
             return "Email não informado";
@@ -116,13 +122,18 @@ class Usuario{
         if(!$usuario){
             return "Email não cadastrado";
         } 
-        else if(!$this->verificarSenha($this->getSenha(), $usuario['Chave'])){
+
+        // Recupera a chave armazenada e a senha criptografada
+        $userKey = $usuario['Chave'];
+        $this->senha = $usuario['Senha'];
+
+        // Verifica a senha
+        if(!$this->verificarSenha($this->getSenha(), $userKey)){
             return "Senha Incorreta";
         }
-        else{
-            $this->setId($usuario["ID"]);
-            return true; // Retorna true se login for bem-sucedido
-        }
+
+        $this->setId($usuario["ID"]);
+        return true; // Retorna true se login for bem-sucedido
 
         // Fecha a declaração e a conexão
         $stmt->close();
